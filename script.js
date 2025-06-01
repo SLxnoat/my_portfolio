@@ -199,9 +199,14 @@ if (contactForm) {
     contactForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(this);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         fetch('/send-email', {
             method: 'POST',
-            body: formData
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Object.fromEntries(formData))
         })
         .then(response => response.json())
         .then(data => {
