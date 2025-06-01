@@ -648,7 +648,8 @@ section {
 
 .gallery-img {
     height: 250px;
-    background-color: var(--hover-bg);
+    background-size: cover;
+    background-position: center;
     position: relative;
     overflow: hidden;
     display: flex;
