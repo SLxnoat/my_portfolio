@@ -629,9 +629,11 @@ section {
 
 /* === GALLERY SECTION === */
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
+    padding: 20px;
 }
 
 .gallery-item {
@@ -642,7 +644,7 @@ section {
     transition: var(--transition);
     width: 200px;
     height: 300px;
-    margin: 10px;
+    flex: 0 0 auto;
 }
 
 .gallery-item:hover {
@@ -651,6 +653,7 @@ section {
 
 .gallery-img {
     height: 100%;
+    width: 100%;
     background-size: cover;
     background-position: center;
     position: relative;
