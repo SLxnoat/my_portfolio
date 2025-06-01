@@ -643,6 +643,8 @@ section {
     transition: var(--transition);
     height: 300px;
     position: relative;
+    width: 200px;
+    margin: 0 auto;
 }
 
 .gallery-img {
