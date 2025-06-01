@@ -199,24 +199,15 @@ if (contactForm) {
     contactForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(this);
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        fetch('/send-email', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(Object.fromEntries(formData))
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('Message sent successfully!');
-            this.reset();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to send message. Please try again.');
-        });
+        const data = Object.fromEntries(formData);
+        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data, 'YOUR_USER_ID')
+            .then(function() {
+                alert('Message sent successfully!');
+                contactForm.reset();
+            }, function(error) {
+                console.error('Error:', error);
+                alert('Failed to send message. Please try again.');
+            });
     });
 }
 
