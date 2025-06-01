@@ -629,9 +629,8 @@ section {
 
 /* === GALLERY SECTION === */
 .gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
 }
@@ -642,20 +641,14 @@ section {
     box-shadow: var(--box-shadow);
     cursor: pointer;
     transition: var(--transition);
-    width: 200px;
     height: 300px;
-    flex: 0 0 auto;
-}
-
-.gallery-item:hover {
-    transform: scale(1.03);
+    position: relative;
 }
 
 .gallery-img {
     height: 100%;
     width: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
     position: relative;
     overflow: hidden;
