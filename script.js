@@ -196,10 +196,22 @@ window.addEventListener('click', (e) => {
 
 // Form Submission
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message! This form is just a demo and doesn\'t actually send emails.');
-        contactForm.reset();
+    contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        fetch('/send-email', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Message sent successfully!');
+            this.reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to send message. Please try again.');
+        });
     });
 }
 
