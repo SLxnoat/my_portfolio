@@ -640,6 +640,9 @@ section {
     box-shadow: var(--box-shadow);
     cursor: pointer;
     transition: var(--transition);
+    width: 200px;
+    height: 300px;
+    margin: 10px;
 }
 
 .gallery-item:hover {
@@ -647,7 +650,7 @@ section {
 }
 
 .gallery-img {
-    height: 200px;
+    height: 100%;
     background-size: cover;
     background-position: center;
     position: relative;
