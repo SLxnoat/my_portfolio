@@ -16,25 +16,85 @@ const contactForm = document.getElementById('contactForm');
 const sections = document.querySelectorAll('section');
 const typingText = document.querySelector('.typing-text');
 
-// Theme Toggle
-themeToggle.addEventListener('change', () => {
-    if (themeToggle.checked) {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        localStorage.setItem('theme', 'light');
+// Loading Screen
+window.addEventListener('load', () => {
+    const loading = document.querySelector('.loading');
+    if (loading) {
+        loading.classList.add('hidden');
+        setTimeout(() => {
+            loading.remove();
+        }, 500);
     }
 });
 
-// Check for saved theme preference
+// Scroll Animations
+const revealElements = document.querySelectorAll('.section-header, .about-content, .project-card, .gallery-3d-item, .contact-card');
+
+const revealOnScroll = () => {
+    revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 100) {
+            element.classList.add('reveal', 'active');
+        }
+    });
+};
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+
+// Smooth Scroll for Navigation Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Navbar Scroll Effect
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+        navbar.classList.remove('scroll-up');
+        return;
+    }
+    
+    if (currentScroll > lastScroll && !navbar.classList.contains('scroll-down')) {
+        navbar.classList.remove('scroll-up');
+        navbar.classList.add('scroll-down');
+    } else if (currentScroll < lastScroll && navbar.classList.contains('scroll-down')) {
+        navbar.classList.remove('scroll-down');
+        navbar.classList.add('scroll-up');
+    }
+    lastScroll = currentScroll;
+});
+
+// Theme Toggle
+themeToggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+    body.classList.toggle('light-mode');
+    
+    // Save theme preference
+    const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+});
+
+// Load saved theme
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    body.classList.remove('light-mode');
-    body.classList.add('dark-mode');
-    themeToggle.checked = true;
+if (savedTheme) {
+    body.classList.remove('light-mode', 'dark-mode');
+    body.classList.add(`${savedTheme}-mode`);
+    themeToggle.checked = savedTheme === 'dark';
 }
 
 // Mobile Menu Toggle
@@ -43,22 +103,25 @@ menuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// Close Mobile Menu when clicking a link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
         menuBtn.classList.remove('active');
         navLinks.classList.remove('active');
-    });
-});
-
-// Navbar Scroll Effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.boxShadow = 'none';
     }
 });
+
+// Initialize skill bars
+skillBars.forEach(bar => {
+    const percentage = bar.getAttribute('per');
+    bar.style.setProperty('--per', percentage);
+});
+
+// Add loading screen to HTML
+const loadingScreen = document.createElement('div');
+loadingScreen.className = 'loading';
+loadingScreen.innerHTML = '<div class="loading-spinner"></div>';
+document.body.prepend(loadingScreen);
 
 // Typing Effect Animation
 function typeWriter(element, text, i = 0) {
@@ -255,20 +318,3 @@ if (yearSpan) {
     const currentYear = new Date().getFullYear();
     yearSpan.textContent = yearSpan.textContent.replace('2025', currentYear);
 }
-
-// Smooth Scrolling for Anchor Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
-});
