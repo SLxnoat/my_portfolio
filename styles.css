@@ -953,3 +953,153 @@ footer {
         height: 280px;
     }
 }
+
+/* Gallery Section */
+.gallery {
+    padding: 100px 0;
+    background: var(--bg-color);
+}
+
+.gallery-3d-container {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    perspective: 2000px;
+}
+
+.gallery-3d-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.gallery-3d-item {
+    position: relative;
+    height: 400px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.gallery-3d-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+.gallery-3d-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
+}
+
+.gallery-3d-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    opacity: 0;
+    transform: translateZ(20px);
+    transition: all 0.5s ease;
+}
+
+.gallery-3d-overlay h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.gallery-3d-overlay p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.gallery-3d-item:hover .gallery-3d-card {
+    transform: translateZ(30px) rotateX(5deg);
+}
+
+.gallery-3d-item:hover .gallery-3d-img {
+    transform: scale(1.1);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-3d-item:hover .gallery-3d-overlay {
+    opacity: 1;
+}
+
+.gallery-3d-item:hover .gallery-3d-overlay h3,
+.gallery-3d-item:hover .gallery-3d-overlay p {
+    transform: translateY(0);
+}
+
+/* Add smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add 3D tilt effect */
+[data-tilt] {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+[data-tilt]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    transform: translateZ(20px);
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gallery-3d-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .gallery-3d-item {
+        height: 350px;
+    }
+
+    .gallery-3d-overlay h3 {
+        font-size: 1.2rem;
+    }
+
+    .gallery-3d-overlay p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-3d-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-3d-item {
+        height: 300px;
+    }
+}
