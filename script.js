@@ -333,12 +333,12 @@ if (yearSpan) {
     yearSpan.textContent = yearSpan.textContent.replace('2025', currentYear);
 }
 
-// Ensure the 'Download CV' button downloads the file
+// Ensure the 'Download CV' button downloads the file from GitHub Pages
 const downloadCvButton = document.getElementById('download-cv');
 if (downloadCvButton) {
     downloadCvButton.addEventListener('click', () => {
         const link = document.createElement('a');
-        link.href = './cv/resume.pdf'; // Path to the resume file
+        link.href = 'https://slxnoat.github.io/my_portfolio/cv/resume.pdf'; // Full GitHub Pages URL
         link.download = 'resume.pdf'; // File name for download
         document.body.appendChild(link);
         link.click();
