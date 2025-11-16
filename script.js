@@ -1,8 +1,8 @@
 // DOM Elements
 const body = document.body;
 const themeToggle = document.getElementById('theme-toggle');
-const menuBtn = document.getElementById('menuBtn');
-const navLinks = document.getElementById('navLinks');
+const menuBtn = document.getElementById('menu-btn');
+const navLinks = document.getElementById('nav-links');
 const navbar = document.getElementById('navbar');
 const skillBars = document.querySelectorAll('.skill-per');
 const projectCards = document.querySelectorAll('.project-card');
@@ -12,7 +12,7 @@ const modal = document.getElementById('galleryModal');
 const modalImg = document.getElementById('modalImg');
 const modalCaption = document.getElementById('modalCaption');
 const closeModal = document.querySelector('.close-modal');
-const contactForm = document.getElementById('contactForm');
+const contactForm = document.getElementById('contact-form');
 const sections = document.querySelectorAll('section');
 const typingText = document.querySelector('.typing-text');
 
@@ -58,24 +58,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar Scroll Effect
+// Navbar Scroll Effect (improved)
 let lastScroll = 0;
+const NAV_SCROLL_THRESHOLD = 30; // pixels — ignore tiny scrolls to prevent flicker
 
 window.addEventListener('scroll', () => {
+    if (!navbar) return; // safety
+
+    // If mobile menu is open, don't hide/show the navbar
+    if (navLinks && navLinks.classList.contains('active')) return;
+
     const currentScroll = window.pageYOffset;
-    
+
+    // At top of page: ensure navbar is visible and clear classes
     if (currentScroll <= 0) {
-        navbar.classList.remove('scroll-up');
+        navbar.classList.remove('scroll-up', 'scroll-down');
+        lastScroll = 0;
         return;
     }
-    
-    if (currentScroll > lastScroll && !navbar.classList.contains('scroll-down')) {
+
+    // Ignore very small scroll movements to avoid rapid toggling
+    if (Math.abs(currentScroll - lastScroll) <= NAV_SCROLL_THRESHOLD) return;
+
+    if (currentScroll > lastScroll) {
+        // Scrolling down — hide navbar
         navbar.classList.remove('scroll-up');
         navbar.classList.add('scroll-down');
-    } else if (currentScroll < lastScroll && navbar.classList.contains('scroll-down')) {
+    } else {
+        // Scrolling up — show navbar
         navbar.classList.remove('scroll-down');
         navbar.classList.add('scroll-up');
     }
+
     lastScroll = currentScroll;
 });
 
@@ -317,4 +331,17 @@ const yearSpan = document.querySelector('.footer-bottom p');
 if (yearSpan) {
     const currentYear = new Date().getFullYear();
     yearSpan.textContent = yearSpan.textContent.replace('2025', currentYear);
+}
+
+// Ensure the 'Download CV' button downloads the file
+const downloadCvButton = document.getElementById('download-cv');
+if (downloadCvButton) {
+    downloadCvButton.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.href = './cv/resume.pdf'; // Path to the resume file
+        link.download = 'resume.pdf'; // File name for download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
 }
