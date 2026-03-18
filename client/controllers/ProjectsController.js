@@ -39,11 +39,30 @@ export class ProjectsController {
     /** Add staggered reveal to project cards so they animate in sequence */
     #staggerRevealCards() {
         document.querySelectorAll('.project-card:not(.hidden)').forEach((card, i) => {
-            card.style.animationDelay = `${i * 60}ms`;
+            card.style.transition = 'none';
             card.classList.remove('active');
-            // Trigger reflow then add active
+            card.style.transform = 'scale(0.95) translateY(20px)';
+            card.style.opacity = '0';
+            
+            // Trigger reflow
             void card.offsetWidth;
-            setTimeout(() => card.classList.add('active'), i * 60);
+            
+            setTimeout(() => {
+                card.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.6s ease';
+                card.classList.add('active');
+                card.style.transform = 'none';
+                card.style.opacity = '1';
+                
+                // Cleanup inline styles to allow CSS hover states
+                setTimeout(() => {
+                    // Only cleanup if the card is still active to avoid glitching during rapid filter changes
+                    if (card.classList.contains('active')) {
+                         card.style.transition = '';
+                         card.style.transform = '';
+                         card.style.opacity = '';
+                    }
+                }, 600);
+            }, i * 80);
         });
     }
 }

@@ -29,7 +29,9 @@ export class ProjectsView {
 
             return `
             <div class="project-card reveal" data-category="${escapeHTML(p.category)}" data-id="${escapeHTML(p.id)}">
-                ${imageBanner}
+                <div class="project-banner-wrapper">
+                    ${imageBanner}
+                </div>
                 <div class="project-info">
                     <h3>${escapeHTML(p.title)}</h3>
                     <p>${escapeHTML(p.description)}</p>
