@@ -311,7 +311,7 @@ button { font-family: var(--font); cursor: pointer; }
 }
 
 /* Quick Links */
-.quick-links { }
+
 .quick-links h3 {
     font-family: var(--font-mono); font-size: .68rem; font-weight: 500;
     color: var(--text-dim); text-transform: uppercase; letter-spacing: .18em;
