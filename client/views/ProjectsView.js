@@ -1,6 +1,8 @@
 /**
  * ProjectsView — Renders the projects grid, image banners, highlights, links, and filters.
  */
+import { escapeHTML } from '../../core/utils.js';
+
 export class ProjectsView {
     /**
      * @param {Project[]} projects
@@ -11,26 +13,26 @@ export class ProjectsView {
 
         grid.innerHTML = projects.map(p => {
             const linksHtml   = this.#buildLinks(p.links);
-            const techHtml    = p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+            const techHtml    = p.tech.map(t => `<span class="tech-tag">${escapeHTML(t)}</span>`).join('');
             const imageBanner = p.imageSrc
-                ? `<div class="project-img-banner" style="background-image:url('${p.imageSrc}')">
+                ? `<div class="project-img-banner" style="background-image:url('${escapeHTML(p.imageSrc)}')">
                        <div class="project-img-overlay"></div>
-                       <span class="project-category-chip">${p.category}</span>
+                       <span class="project-category-chip">${escapeHTML(p.category)}</span>
                    </div>`
                 : `<div class="project-icon-banner">
-                       <div class="project-icon-wrap"><i class="${p.icon}"></i></div>
-                       <span class="project-category-chip">${p.category}</span>
+                       <div class="project-icon-wrap"><i class="${escapeHTML(p.icon)}"></i></div>
+                       <span class="project-category-chip">${escapeHTML(p.category)}</span>
                    </div>`;
             const highlightsHtml = p.highlights && p.highlights.length
-                ? `<ul class="project-highlights">${p.highlights.map(h => `<li><i class="fas fa-check-circle"></i>${h}</li>`).join('')}</ul>`
+                ? `<ul class="project-highlights">${p.highlights.map(h => `<li><i class="fas fa-check-circle"></i>${escapeHTML(h)}</li>`).join('')}</ul>`
                 : '';
 
             return `
-            <div class="project-card reveal" data-category="${p.category}" data-id="${p.id}">
+            <div class="project-card reveal" data-category="${escapeHTML(p.category)}" data-id="${escapeHTML(p.id)}">
                 ${imageBanner}
                 <div class="project-info">
-                    <h3>${p.title}</h3>
-                    <p>${p.description}</p>
+                    <h3>${escapeHTML(p.title)}</h3>
+                    <p>${escapeHTML(p.description)}</p>
                     ${highlightsHtml}
                     <div class="project-tech">${techHtml}</div>
                     <div class="project-links">${linksHtml}</div>
@@ -49,7 +51,7 @@ export class ProjectsView {
         return map
             .filter(({ key }) => links[key])
             .map(({ key, label, icon }) =>
-                `<a href="${links[key]}" class="project-link" target="_blank" rel="noopener noreferrer"><i class="${icon}"></i> ${label}</a>`
+                `<a href="${escapeHTML(links[key])}" class="project-link" target="_blank" rel="noopener noreferrer"><i class="${icon}"></i> ${label}</a>`
             ).join('');
     }
 

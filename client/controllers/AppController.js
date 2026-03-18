@@ -24,6 +24,7 @@ import { AboutView }           from '../views/AboutView.js';
 import { ProjectsController }  from './ProjectsController.js';
 import { GalleryController }   from './GalleryController.js';
 import { ContactController }   from './ContactController.js';
+import { escapeHTML }          from '../../core/utils.js';
 
 class AppController {
     #db;
@@ -99,8 +100,8 @@ class AppController {
                         nameEl.textContent = chunk;
                     } else {
                         nameEl.innerHTML =
-                            prefix +
-                            `<span class="highlight-text">${chunk.slice(prefix.length)}</span>`;
+                            escapeHTML(prefix) +
+                            `<span class="highlight-text">${escapeHTML(chunk.slice(prefix.length))}</span>`;
                     }
                     setTimeout(type, 22);
                 }
@@ -369,7 +370,7 @@ class AppController {
         const toast = document.getElementById('toast');
         if (!toast) return;
         toast.className = `toast-${type} show`;
-        toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${msg}`;
+        toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${escapeHTML(msg)}`;
         clearTimeout(this._toastTimer);
         this._toastTimer = setTimeout(() => {
             toast.classList.remove('show');

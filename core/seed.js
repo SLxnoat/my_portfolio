@@ -7,13 +7,18 @@ import { Profile } from './models/Profile.js';
 import { Project } from './models/Project.js';
 import { GalleryItem } from './models/GalleryItem.js';
 import { Skill } from './models/Skill.js';
+import { hashPassword } from './utils.js';
 
 export async function seedDatabase() {
     const SEED_FLAG = 'portfolio_db_seeded_v2';
     const db = Database.getInstance();
 
-    // ── Auth is ALWAYS written (never skip) so login can never be broken ──
-    await db.put('auth', { id: 'admin', username: 'admin', password: 'admin123' });
+    // ── Protect auth credentials from being overwritten ──
+    const existingAuth = await db.get('auth', 'admin');
+    if (!existingAuth) {
+        const defaultPasswordHash = await hashPassword('admin123');
+        await db.put('auth', { id: 'admin', username: 'admin', password: defaultPasswordHash });
+    }
 
     // ── Everything else only seeds once ───────────────────────────────────
     if (localStorage.getItem(SEED_FLAG)) return;

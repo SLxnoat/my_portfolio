@@ -4,6 +4,7 @@
  */
 import { Database } from '../../core/db.js';
 import { seedDatabase } from '../../core/seed.js';
+import { hashPassword } from '../../core/utils.js';
 
 class AuthController {
     #db;
@@ -25,7 +26,8 @@ class AuthController {
         // Safety net: always guarantee an auth record exists
         const existing = await this.#db.get('auth', 'admin');
         if (!existing) {
-            await this.#db.put('auth', { id: 'admin', username: 'admin', password: 'admin123' });
+            const defaultHash = await hashPassword('admin123');
+            await this.#db.put('auth', { id: 'admin', username: 'admin', password: defaultHash });
         }
 
         this.#bindForm();
@@ -49,7 +51,8 @@ class AuthController {
 
             try {
                 const record = await this.#db.get('auth', 'admin');
-                if (record && record.username === username && record.password === password) {
+                const hashedPassword = await hashPassword(password);
+                if (record && record.username === username && record.password === hashedPassword) {
                     sessionStorage.setItem('admin_auth', '1');
                     sessionStorage.setItem('admin_user', username);
                     window.location.replace('index.html');

@@ -1,6 +1,8 @@
 /**
  * GalleryView — Renders the gallery grid and lightbox modal.
  */
+import { escapeHTML } from '../../core/utils.js';
+
 export class GalleryView {
     /**
      * @param {GalleryItem[]} items
@@ -10,12 +12,12 @@ export class GalleryView {
         if (!grid) return;
 
         grid.innerHTML = items.map(item => `
-            <div class="gallery-item reveal" data-id="${item.id}" data-src="${item.imageSrc}" data-title="${item.title}" data-desc="${item.description}">
-                <div class="gallery-card" style="background-image:url('${item.imageSrc}');">
+            <div class="gallery-item reveal" data-id="${escapeHTML(item.id)}" data-src="${escapeHTML(item.imageSrc)}" data-title="${escapeHTML(item.title)}" data-desc="${escapeHTML(item.description)}">
+                <div class="gallery-card" style="background-image:url('${escapeHTML(item.imageSrc)}');">
                     <div class="gallery-overlay">
                         <i class="fas fa-expand"></i>
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
+                        <h3>${escapeHTML(item.title)}</h3>
+                        <p>${escapeHTML(item.description)}</p>
                     </div>
                 </div>
             </div>`).join('');
@@ -28,7 +30,7 @@ export class GalleryView {
         if (!modal) return;
 
         img.src = src;
-        caption.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
+        caption.innerHTML = `<h3>${escapeHTML(title)}</h3><p>${escapeHTML(desc)}</p>`;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }

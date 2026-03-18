@@ -2,6 +2,7 @@
  * SettingsController — Manage admin authentication credentials.
  */
 import { Database } from '../../core/db.js';
+import { hashPassword } from '../../core/utils.js';
 
 export class SettingsController {
     #db;
@@ -71,7 +72,8 @@ export class SettingsController {
             const data = Object.fromEntries(fd.entries());
 
             // Verify current password
-            if (data.currentPassword !== authRecord.password) {
+            const hashedCurrentPassword = await hashPassword(data.currentPassword);
+            if (hashedCurrentPassword !== authRecord.password) {
                 this.#showError(errorBox, 'Incorrect current password!');
                 return;
             }
@@ -87,7 +89,7 @@ export class SettingsController {
                     this.#showError(errorBox, 'New password must be at least 5 characters long.');
                     return;
                 }
-                finalPassword = data.newPassword;
+                finalPassword = await hashPassword(data.newPassword);
             }
 
             if (!data.username || data.username.trim() === '') {

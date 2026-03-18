@@ -1,6 +1,8 @@
 /**
  * HeroView — Renders the hero section from profile data.
  */
+import { escapeHTML } from '../../core/utils.js';
+
 export class HeroView {
     /**
      * @param {Profile} profile
@@ -13,7 +15,7 @@ export class HeroView {
         const avatarEl = document.getElementById('hero-avatar');
         const cvBtn = document.getElementById('download-cv');
 
-        if (nameEl) nameEl.innerHTML = `Hi, I'm <span class="highlight-text">${profile.name}.</span>`;
+        if (nameEl) nameEl.innerHTML = `Hi, I'm <span class="highlight-text">${escapeHTML(profile.name)}.</span>`;
         if (titleEl) titleEl.textContent = profile.title;
         if (bioEl) bioEl.textContent = profile.bio;
         if (avatarEl) avatarEl.src = profile.avatarSrc;

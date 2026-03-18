@@ -1,6 +1,8 @@
 /**
  * AboutView — Renders the About section from profile + skills data.
  */
+import { escapeHTML } from '../../core/utils.js';
+
 export class AboutView {
     /**
      * @param {Profile} profile
@@ -33,11 +35,11 @@ export class AboutView {
             skillsContainer.innerHTML = skills.map(skill => `
                 <div class="skill">
                     <div class="skill-header">
-                        <span class="skill-name"><i class="${skill.icon || 'fas fa-star'}"></i> ${skill.name}</span>
-                        <span class="skill-pct">${skill.percentage}%</span>
+                        <span class="skill-name"><i class="${escapeHTML(skill.icon || 'fas fa-star')}"></i> ${escapeHTML(skill.name)}</span>
+                        <span class="skill-pct">${escapeHTML(skill.percentage)}%</span>
                     </div>
                     <div class="skill-bar">
-                        <div class="skill-fill" data-pct="${skill.percentage}" style="width:0%"></div>
+                        <div class="skill-fill" data-pct="${escapeHTML(skill.percentage)}" style="width:0%"></div>
                     </div>
                 </div>
             `).join('');
@@ -48,16 +50,16 @@ export class AboutView {
         if (timelineContainer && profile.experience && profile.experience.length) {
             timelineContainer.innerHTML = profile.experience.map(exp => `
                 <div class="timeline-item reveal">
-                    <div class="tl-dot"><i class="${exp.icon || 'fas fa-briefcase'}"></i></div>
+                    <div class="tl-dot"><i class="${escapeHTML(exp.icon || 'fas fa-briefcase')}"></i></div>
                     <div class="tl-card">
                         <div class="tl-header">
-                            <h4>${exp.role}</h4>
-                            <span class="tl-badge">${exp.period}</span>
+                            <h4>${escapeHTML(exp.role)}</h4>
+                            <span class="tl-badge">${escapeHTML(exp.period)}</span>
                         </div>
-                        <div class="tl-company"><i class="fas fa-building"></i> ${exp.company}</div>
-                        <p>${exp.desc}</p>
+                        <div class="tl-company"><i class="fas fa-building"></i> ${escapeHTML(exp.company)}</div>
+                        <p>${escapeHTML(exp.desc)}</p>
                         <div class="tl-tags">
-                            ${(exp.tags || []).map(tag => `<span>${tag}</span>`).join('')}
+                            ${(exp.tags || []).map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}
                         </div>
                     </div>
                 </div>
