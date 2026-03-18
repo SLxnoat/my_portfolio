@@ -9,6 +9,7 @@ import { ContactView }  from '../views/ContactView.js';
 export class ContactController {
     #db;
     #view;
+    #adminEmail = '';
 
     constructor() {
         this.#db   = Database.getInstance();
@@ -18,7 +19,9 @@ export class ContactController {
     async init() {
         const raw = await this.#db.get('profile', 'main');
         if (raw) {
-            this.#view.renderContactInfo(Profile.fromPlainObject(raw));
+            const profile = Profile.fromPlainObject(raw);
+            this.#view.renderContactInfo(profile);
+            this.#adminEmail = profile.notificationEmail || profile.email;
         }
         this.#bindForm();
     }
@@ -57,7 +60,32 @@ export class ContactController {
             });
 
             try {
+                // Save locally to IndexedDB Admin Panel
                 await this.#db.put('messages', msg.toPlainObject());
+
+                // Dispatch via FormSubmit if admin email is configured
+                if (this.#adminEmail) {
+                    try {
+                        await fetch(`https://formsubmit.co/ajax/${this.#adminEmail}`, {
+                            method: "POST",
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name: msg.name,
+                                email: msg.email,
+                                subject: msg.subject,
+                                message: msg.body,
+                                _template: "box",
+                                _subject: `New Portfolio Message from ${msg.name}`
+                            })
+                        });
+                    } catch (fetchErr) {
+                        console.warn("FormSubmit fetch failed, but saved locally:", fetchErr);
+                    }
+                }
+
                 form.reset();
                 this.#view.showToast('✅ Message sent! I\'ll get back to you soon.', 'success');
             } catch (err) {

@@ -21,6 +21,24 @@ export class ProfileController {
         container.innerHTML = `
         <form id="profile-form" class="admin-form">
 
+            <!-- ── Availability & Notifications ── -->
+            <div class="avatar-crud-card">
+                <div class="avatar-info" style="padding: 24px;">
+                    <h3>Availability & Notifications</h3>
+                    <p>Toggle your hireable status and configure where contact messages are sent.</p>
+                    
+                    <div class="form-group" style="margin-top: 16px; flex-direction: row; align-items: center; gap: 12px;">
+                        <input type="checkbox" id="isAvailable" name="isAvailable" style="width: 20px; height: 20px;" ${p.isAvailable ? 'checked' : ''}>
+                        <label for="isAvailable" style="font-size: 1rem; color: var(--text); cursor: pointer;">AVAILABLE FOR WORK</label>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label>Contact Notification Email</label>
+                        <input name="notificationEmail" type="email" value="${p.notificationEmail}" placeholder="your@email.com">
+                    </div>
+                </div>
+            </div>
+
             <!-- ── Avatar Card ── -->
             <div class="avatar-crud-card">
                 <div class="avatar-preview-wrap">
@@ -85,6 +103,14 @@ export class ProfileController {
                 <div class="form-group"><label>Gaming Alias</label><input name="gamingAlias" value="${p.gamingAlias}"></div>
                 <div class="form-group"><label>External CV Link (Optional fallback)</label><input name="cvUrl" value="${p.cvUrl}"></div>
                 <div class="form-group"><label>Tagline</label><input name="tagline" value="${p.tagline}"></div>
+            </div>
+
+            <!-- ── Hero Stats ── -->
+            <div class="section-divider"><span>Hero Section Stats</span></div>
+            <div class="form-grid">
+                <div class="form-group"><label>GitHub Projects count</label><input type="number" name="stats.githubProjects" value="${p.stats?.githubProjects || 0}"></div>
+                <div class="form-group"><label>Best ML Accuracy (%)</label><input type="number" name="stats.mlAccuracy" value="${p.stats?.mlAccuracy || 0}"></div>
+                <div class="form-group"><label>AI/ML Systems count</label><input type="number" name="stats.aiSystems" value="${p.stats?.aiSystems || 0}"></div>
             </div>
 
             <!-- ── Social Links ── -->
@@ -193,25 +219,32 @@ export class ProfileController {
         container.querySelector('#profile-form')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const fd   = new FormData(e.target);
-            const data = Object.fromEntries(fd.entries());
-            const updated = new Profile({
-                id: 'main',
-                name: data.name, title: data.title, bio: data.bio,
-                email: data.email, phone: data.phone, location: data.location,
-                degree: data.degree, university: data.university,
-                freelance: data.freelance, gamingAlias: data.gamingAlias,
-                cvUrl: data.cvUrl, tagline: data.tagline,
-                cvFile: data.cvFile || p.cvFile,
-                cvFileName: data.cvFileName || p.cvFileName,
-                avatarSrc: data.avatarSrc || p.avatarSrc,
-                socials: {
-                    github:   data['socials.github'],
-                    youtube:  data['socials.youtube'],
-                    facebook: data['socials.facebook'],
-                    linkedin: data['socials.linkedin'],
-                },
+            const updates = Object.fromEntries(fd.entries());
+
+            // Map flat form keys to nested Profile structures
+            const socialsObj = {
+                github: updates['socials.github'] || '',
+                youtube: updates['socials.youtube'] || '',
+                facebook: updates['socials.facebook'] || '',
+                linkedin: updates['socials.linkedin'] || ''
+            };
+            
+            const statsObj = {
+                githubProjects: parseInt(updates['stats.githubProjects']) || 0,
+                mlAccuracy: parseInt(updates['stats.mlAccuracy']) || 0,
+                aiSystems: parseInt(updates['stats.aiSystems']) || 0
+            };
+
+            const finalProfile = new Profile({
+                ...p.toPlainObject(), // Start with existing profile data
+                ...updates,           // Overlay with flat form data
+                socials: socialsObj,  // Override socials with parsed object
+                stats: statsObj,      // Override stats with parsed object
+                avatarSrc: this.#currentAvatarSrc, // Use the current state of the avatar (from preview)
+                isAvailable: container.querySelector('#isAvailable').checked, // Get checkbox state
+                notificationEmail: updates.notificationEmail || ''
             });
-            await this.#db.put('profile', updated.toPlainObject());
+            await this.#db.put('profile', finalProfile.toPlainObject());
             this.#showSaveToast('Profile saved!');
         });
     }

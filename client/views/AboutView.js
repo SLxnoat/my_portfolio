@@ -29,7 +29,7 @@ export class AboutView {
 
         // Skills
         const skillsContainer = document.getElementById('skills-list');
-        if (skillsContainer && skills.length) {
+        if (skillsContainer && skills && skills.length) {
             skillsContainer.innerHTML = skills.map(skill => `
                 <div class="skill">
                     <div class="skill-header">
@@ -38,6 +38,27 @@ export class AboutView {
                     </div>
                     <div class="skill-bar">
                         <div class="skill-fill" data-pct="${skill.percentage}" style="width:0%"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Experience Timeline
+        const timelineContainer = document.querySelector('.timeline');
+        if (timelineContainer && profile.experience && profile.experience.length) {
+            timelineContainer.innerHTML = profile.experience.map(exp => `
+                <div class="timeline-item reveal">
+                    <div class="tl-dot"><i class="${exp.icon || 'fas fa-briefcase'}"></i></div>
+                    <div class="tl-card">
+                        <div class="tl-header">
+                            <h4>${exp.role}</h4>
+                            <span class="tl-badge">${exp.period}</span>
+                        </div>
+                        <div class="tl-company"><i class="fas fa-building"></i> ${exp.company}</div>
+                        <p>${exp.desc}</p>
+                        <div class="tl-tags">
+                            ${(exp.tags || []).map(tag => `<span>${tag}</span>`).join('')}
+                        </div>
                     </div>
                 </div>
             `).join('');

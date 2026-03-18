@@ -33,5 +33,22 @@ export class HeroView {
                 el.style.display = '';
             }
         });
+
+        // Availability Badge
+        const badgeEl = document.getElementById('hero-badge');
+        if (badgeEl) {
+            badgeEl.style.display = profile.isAvailable ? 'inline-flex' : 'none';
+        }
+
+        // Stats
+        if (profile.stats) {
+            const githubEl = document.getElementById('stat-github');
+            const mlEl = document.getElementById('stat-ml');
+            const aiEl = document.getElementById('stat-ai');
+            
+            if (githubEl) githubEl.dataset.target = profile.stats.githubProjects;
+            if (mlEl) mlEl.dataset.target = profile.stats.mlAccuracy;
+            if (aiEl) aiEl.dataset.target = profile.stats.aiSystems;
+        }
     }
 }

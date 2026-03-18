@@ -61,6 +61,35 @@ export class Profile {
         this.cvFile = cvFile;
         this.cvFileName = cvFileName;
         this.tagline = tagline;
+
+        // New feature sync fields
+        this.isAvailable = arguments[0].isAvailable !== undefined ? arguments[0].isAvailable : true;
+        this.notificationEmail = arguments[0].notificationEmail || email;
+        
+        this.stats = {
+            githubProjects: arguments[0].stats?.githubProjects || 17,
+            mlAccuracy: arguments[0].stats?.mlAccuracy || 96,
+            aiSystems: arguments[0].stats?.aiSystems || 4
+        };
+        
+        this.experience = arguments[0].experience || [
+            {
+                role: 'Founder & Lead Developer',
+                period: '2024 – Present',
+                company: 'ArtXpert-Code (Open Source)',
+                desc: 'Maintaining public repositories spanning ML pipelines, NLP systems, REST APIs, and full-stack web apps.',
+                tags: ['Python', 'MLOps', 'Docker'],
+                icon: 'fas fa-code'
+            },
+            {
+                role: 'Founder & Graphic Designer',
+                period: '2022 – Present',
+                company: 'ArtXpert Design Brand',
+                desc: 'Client-facing design business delivering brand identity and digital illustration.',
+                tags: ['Photoshop', 'Branding'],
+                icon: 'fas fa-palette'
+            }
+        ];
     }
 
     toPlainObject() {
