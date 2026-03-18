@@ -25,19 +25,21 @@ export class HeroView {
             badgeEl.style.display = profile.availableForWork ? 'inline-flex' : 'none';
         }
 
-        // Social icons
+        // Social icons — covers both hero text column pills and in-card icons
         const socials = [
-            { key: 'github',   icon: 'fab fa-github',   id: 'social-github' },
-            { key: 'youtube',  icon: 'fab fa-youtube',  id: 'social-youtube' },
-            { key: 'facebook', icon: 'fab fa-facebook', id: 'social-facebook' },
-            { key: 'linkedin', icon: 'fab fa-linkedin', id: 'social-linkedin' },
+            { key: 'github',   ids: ['social-github',   'social-github-card']   },
+            { key: 'youtube',  ids: ['social-youtube',  'social-youtube-card']  },
+            { key: 'facebook', ids: ['social-facebook', 'social-facebook-card'] },
+            { key: 'linkedin', ids: ['social-linkedin', 'social-linkedin-card'] },
         ];
-        socials.forEach(({ key, id }) => {
-            const el = document.getElementById(id);
-            if (el && profile.socials[key]) {
-                el.href = profile.socials[key];
-                el.style.display = '';
-            }
+        socials.forEach(({ key, ids }) => {
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && profile.socials[key]) {
+                    el.href = profile.socials[key];
+                    el.style.display = '';
+                }
+            });
         });
     }
 }

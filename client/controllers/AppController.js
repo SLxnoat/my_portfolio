@@ -198,7 +198,7 @@ class AppController {
             });
         }, { threshold: 0.5 });
 
-        const statsEl = document.querySelector('.hero-stats');
+        const statsEl = document.querySelector('.stats-inner, .hero-stats');
         if (statsEl) obs.observe(statsEl);
     }
 
@@ -278,7 +278,7 @@ class AppController {
 
     #initMagneticButtons() {
         const attachMagnetic = () => {
-            const btns = document.querySelectorAll('.btn.magnetic, .social-link');
+            const btns = document.querySelectorAll('.magnetic, .social-link');
             if (window.matchMedia('(pointer: coarse)').matches) return;
 
             btns.forEach(btn => {
@@ -314,16 +314,19 @@ class AppController {
 
         // Mobile menu toggle
         menuBtn?.addEventListener('click', () => {
+            const isOpen = navLinks.classList.contains('open');
             menuBtn.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            navLinks.classList.toggle('open');
+            menuBtn.setAttribute('aria-expanded', String(!isOpen));
+            document.body.style.overflow = !isOpen ? 'hidden' : '';
         });
 
         // Close mobile menu on nav-link click
         navLinks?.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 menuBtn?.classList.remove('active');
-                navLinks.classList.remove('active');
+                navLinks.classList.remove('open');
+                menuBtn?.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
@@ -332,7 +335,8 @@ class AppController {
         document.addEventListener('click', (e) => {
             if (!menuBtn?.contains(e.target) && !navLinks?.contains(e.target)) {
                 menuBtn?.classList.remove('active');
-                navLinks?.classList.remove('active');
+                navLinks?.classList.remove('open');
+                menuBtn?.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
@@ -347,7 +351,7 @@ class AppController {
                 lastScroll = 0;
                 return;
             }
-            if (navLinks?.classList.contains('active')) return;
+            if (navLinks?.classList.contains('open')) return;
             if (Math.abs(cur - lastScroll) < 40) return;
             navbar?.classList.toggle('scroll-down', cur > lastScroll);
             navbar?.classList.toggle('scroll-up',   cur < lastScroll);

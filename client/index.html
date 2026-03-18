@@ -4,167 +4,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Charuka Mayura Bandara — AI/ML Engineer, Web Developer & Digital Artist based in Gampaha, Sri Lanka.">
+    <meta name="description" content="Charuka Mayura Bandara — AI/ML Engineer, Web Developer & Digital Artist. Building intelligent systems that solve real-world problems.">
+    <meta name="keywords" content="AI, ML, Machine Learning, Engineer, Sri Lanka, Portfolio, Python, TensorFlow">
+    <meta property="og:title" content="Charuka Mayura | AI/ML Engineer">
+    <meta property="og:description" content="Building intelligent systems that solve real-world problems.">
     <title>Charuka Mayura | AI/ML Engineer</title>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&family=Fira+Code:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
-<body class="dark-mode">
+<body>
 
-    <!-- ─── CURSOR GLOW ──────────────────────────────────────── -->
+    <!-- Cursor -->
     <div id="cursor-glow"></div>
 
-    <!-- ─── NAVIGATION ─────────────────────────────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════
+         NAVBAR — Floating Glass Pill
+    ═══════════════════════════════════════════════════════ -->
     <nav id="navbar">
-        <div class="container nav-container">
+        <div class="nav-container">
             <a class="logo" href="#home">
-                <span class="logo-accent">&lt;</span>CM<span class="logo-accent">/&gt;</span>
+                <span class="logo-bracket">&lt;</span>CM<span class="logo-bracket">/&gt;</span>
             </a>
+
             <div class="nav-links" id="nav-links">
                 <ul>
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#home"     class="nav-link">Home</a></li>
+                    <li><a href="#about"    class="nav-link">About</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#gallery"  class="nav-link">Gallery</a></li>
+                    <li><a href="#contact"  class="nav-link">Contact</a></li>
                 </ul>
             </div>
-            <div class="nav-right">
+
+            <div class="nav-actions">
+                <!-- Theme Toggle -->
                 <div class="theme-switch">
-                    <input type="checkbox" id="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" aria-label="Toggle theme">
                     <label for="theme-toggle" class="toggle-label" title="Toggle theme">
                         <i class="fas fa-moon"></i>
                         <i class="fas fa-sun"></i>
-                        <div class="toggle-ball"></div>
+                        <span class="toggle-ball"></span>
                     </label>
                 </div>
-                <div class="menu-btn" id="menu-btn" aria-label="Open menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
+                <!-- Mobile Burger -->
+                <button class="menu-btn" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- ─── HERO ──────────────────────────────────────────────── -->
+    <!-- ═══════════════════════════════════════════════════════
+         HERO — Full Viewport Aurora
+    ═══════════════════════════════════════════════════════ -->
     <section id="home" class="hero">
+        <!-- Background Layers -->
         <div class="particles" id="particles"></div>
-        <div class="hero-bg-glow"></div>
-        <div class="hero-mesh"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <div class="hero-badge"><i class="fas fa-circle-dot pulse"></i> Available for work</div>
-                <h1 class="typing-text" id="hero-name">Hi, I'm <span class="highlight-text">Charuka Mayura
-                        Bandara.</span></h1>
-                <h2 id="hero-title">Creative Web Developer &amp; Digital Artist</h2>
-                <p id="hero-bio">I'm passionate about web development, graphic design, and gaming.</p>
-                <div class="cta-buttons reveal" data-delay="300">
-                    <button class="btn primary-btn magnetic" onclick="document.getElementById('projects').scrollIntoView()">View Work</button>
-                    <button class="btn secondary-btn magnetic" id="download-cv" data-href="../cv/resume.pdf">Download CV <i class="fas fa-download"></i></button>
+        <div class="hero-aurora"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-noise"></div>
+
+        <div class="container hero-layout">
+
+            <!-- Left: Text Column -->
+            <div class="hero-text-col">
+                <div class="hero-badge reveal" id="hero-availability-badge">
+                    <span class="badge-dot"></span>
+                    Available for Work
                 </div>
 
+                <h1 class="hero-headline reveal" data-delay="100" id="hero-name">
+                    Hi, I'm <span class="gradient-text">Charuka Mayura Bandara.</span>
+                </h1>
+
+                <p class="hero-role reveal" data-delay="200" id="hero-title">
+                    Aspiring AI / Machine Learning Engineer
+                </p>
+
+                <p class="hero-bio reveal" data-delay="300" id="hero-bio">
+                    IT undergraduate building production AI systems — NLP classifiers, LLM assistants, and ML pipelines — grounded in mathematics and deployed with MLOps best practices.
+                </p>
+
+                <div class="hero-cta reveal" data-delay="400">
+                    <button class="btn-primary magnetic" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+                        <span>View My Work</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn-secondary magnetic" id="download-cv" data-href="../cv/resume.pdf">
+                        <span>Download CV</span>
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+
+                <!-- Social pill links -->
+                <div class="hero-socials reveal" data-delay="500">
+                    <a id="social-github"   href="#" class="social-pill" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    <a id="social-linkedin" href="#" class="social-pill" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a id="social-youtube"  href="#" class="social-pill" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                    <a id="social-facebook" href="#" class="social-pill" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                </div>
             </div>
-            <div class="hero-image">
-                <div class="profile-card">
+
+            <!-- Right: Profile Card -->
+            <div class="hero-card-col">
+                <div class="profile-card reveal" data-delay="200">
                     <div class="profile-ring"></div>
                     <div class="profile-glow"></div>
-                    <img src="../profile.jpg" alt="Charuka Mayura" id="hero-avatar">
-                    <div class="social-icons">
-                        <a id="social-github" href="#" class="social-icon" target="_blank" rel="noopener noreferrer"><i
-                                class="fab fa-github"></i></a>
-                        <a id="social-youtube" href="#" class="social-icon" target="_blank" rel="noopener noreferrer"><i
-                                class="fab fa-youtube"></i></a>
-                        <a id="social-facebook" href="#" class="social-icon" target="_blank"
-                            rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-                        <a id="social-linkedin" href="#" class="social-icon" target="_blank"
-                            rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                    <!-- Floating skill chips -->
+                    <img src="../profile.jpg" alt="Charuka Mayura Bandara" id="hero-avatar" loading="eager">
+
+                    <!-- Floating chips -->
                     <div class="float-chip chip-tl"><i class="fas fa-brain"></i> AI / ML</div>
                     <div class="float-chip chip-tr"><i class="fab fa-python"></i> Python</div>
                     <div class="float-chip chip-br"><i class="fas fa-palette"></i> Design</div>
+
+                    <!-- Social icons on card -->
+                    <div class="social-icons">
+                        <a id="social-github-card"   href="#" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a id="social-youtube-card"  href="#" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a id="social-facebook-card" href="#" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a id="social-linkedin-card" href="#" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Hero Stats Bottom Row -->
-        <div class="container hero-stats-container">
-            <div class="hero-stats reveal">
-                <div class="stat-pill">
-                    <div class="stat-num-row"><span class="stat-n" data-target="17">0</span><span class="stat-suf">+</span></div>
-                    <span class="stat-l">GitHub Projects</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-pill">
-                    <div class="stat-num-row"><span class="stat-n" data-target="96">0</span><span class="stat-suf">%</span></div>
-                    <span class="stat-l">Best ML Accuracy</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-pill">
-                    <div class="stat-num-row"><span class="stat-n" data-target="4">0</span><span class="stat-suf">+</span></div>
-                    <span class="stat-l">AI/ML Systems</span>
+        <!-- Stats Bar -->
+        <div class="hero-stats-bar">
+            <div class="container">
+                <div class="stats-inner reveal">
+                    <div class="stat-item">
+                        <span class="stat-number"><span class="stat-n" data-target="17">0</span><span class="stat-suf">+</span></span>
+                        <span class="stat-label">GitHub Projects</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="stat-item">
+                        <span class="stat-number"><span class="stat-n" data-target="96">0</span><span class="stat-suf">%</span></span>
+                        <span class="stat-label">Best ML Accuracy</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="stat-item">
+                        <span class="stat-number"><span class="stat-n" data-target="4">0</span><span class="stat-suf">+</span></span>
+                        <span class="stat-label">AI/ML Systems Built</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="stat-item">
+                        <span class="stat-number"><span class="stat-n" data-target="3">0</span><span class="stat-suf">+</span></span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <a href="#about" class="scroll-hint"><span>Scroll</span><i class="fas fa-chevron-down"></i></a>
+        <!-- Scroll Cue -->
+        <a href="#about" class="scroll-cue" aria-label="Scroll to About">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </section>
 
-    <!-- ─── ABOUT ─────────────────────────────────────────────── -->
-    <section id="about" class="about">
+    <!-- ═══════════════════════════════════════════════════════
+         ABOUT — Dashboard Grid
+    ═══════════════════════════════════════════════════════ -->
+    <section id="about" class="section about-section">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">WHO I AM</span>
-                <h2>About Me</h2>
-                <p class="section-sub">IT undergraduate & aspiring AI/ML Engineer crafting intelligent systems</p>
+                <h2 class="section-title">About Me</h2>
+                <p class="section-sub">IT undergraduate &amp; aspiring AI/ML Engineer crafting intelligent systems</p>
             </div>
 
-            <!-- Bento Grid Wrapper -->
+            <!-- Dashboard Bento Grid -->
             <div class="bento-wrapper">
-                
-                <!-- Main Bio & Info (Large) -->
+
+                <!-- Bio & Info Card -->
                 <div class="bento-box bento-large js-tilt reveal">
-                    <h3 class="bento-title"><i class="fas fa-user-astronaut text-gradient"></i> Biography</h3>
-                    <p id="about-bio" class="bento-text"></p>
-                    <div class="info-grid mt-4">
-                        <div class="info-row"><span class="info-label"><i class="fas fa-user"></i> Name</span><span class="info-value text-highlight" id="about-name"></span></div>
-                        <div class="info-row"><span class="info-label"><i class="fas fa-graduation-cap"></i> Degree</span><span class="info-value" id="about-degree"></span></div>
-                        <div class="info-row"><span class="info-label"><i class="fas fa-university"></i> University</span><span class="info-value" id="about-university"></span></div>
-                        <div class="info-row"><span class="info-label"><i class="fas fa-map-marker-alt"></i> Location</span><span class="info-value" id="about-location"></span></div>
-                        <div class="info-row"><span class="info-label"><i class="fas fa-envelope"></i> Email</span><span class="info-value" id="about-email"></span></div>
+                    <div class="bento-icon-badge"><i class="fas fa-user-astronaut"></i></div>
+                    <h3 class="bento-title">Biography</h3>
+                    <p id="about-bio" class="bento-bio"></p>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label"><i class="fas fa-user"></i> Name</span>
+                            <span class="info-value" id="about-name"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><i class="fas fa-graduation-cap"></i> Degree</span>
+                            <span class="info-value" id="about-degree"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><i class="fas fa-university"></i> University</span>
+                            <span class="info-value" id="about-university"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><i class="fas fa-map-marker-alt"></i> Location</span>
+                            <span class="info-value" id="about-location"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><i class="fas fa-envelope"></i> Email</span>
+                            <span class="info-value" id="about-email"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label"><i class="fas fa-gamepad"></i> Gaming</span>
+                            <span class="info-value accent-text" id="about-alias"></span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Tech Stack Cloud (Medium) -->
+                <!-- Core Stack Cloud -->
                 <div class="bento-box bento-medium js-tilt reveal" data-delay="100">
-                    <h3 class="bento-title"><i class="fas fa-microchip text-gradient"></i> Core Stack</h3>
+                    <div class="bento-icon-badge"><i class="fas fa-microchip"></i></div>
+                    <h3 class="bento-title">Core Stack</h3>
                     <div class="tech-stack-cloud" id="tech-stack-cloud">
-                        <div class="ts-item"><i class="fab fa-python"></i><span>Python</span></div>
-                        <div class="ts-item"><i class="fas fa-brain"></i><span>TensorFlow</span></div>
+                        <div class="ts-item ts-primary"><i class="fab fa-python"></i><span>Python</span></div>
+                        <div class="ts-item ts-secondary"><i class="fas fa-brain"></i><span>TensorFlow</span></div>
                         <div class="ts-item"><i class="fas fa-robot"></i><span>LangChain</span></div>
                         <div class="ts-item"><i class="fab fa-react"></i><span>React</span></div>
                         <div class="ts-item"><i class="fas fa-server"></i><span>Flask</span></div>
                         <div class="ts-item"><i class="fab fa-docker"></i><span>Docker</span></div>
                         <div class="ts-item"><i class="fas fa-database"></i><span>MySQL</span></div>
                         <div class="ts-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                        <div class="ts-item"><i class="fas fa-chart-line"></i><span>Scikit-learn</span></div>
                     </div>
                 </div>
 
-                <!-- Experience Timeline (Tall) -->
+                <!-- Experience Timeline -->
                 <div class="bento-box bento-tall js-tilt reveal" data-delay="150">
-                    <h3 class="bento-title"><i class="fas fa-briefcase text-gradient"></i> Experience</h3>
-                    <div class="timeline mt-4">
+                    <div class="bento-icon-badge"><i class="fas fa-briefcase"></i></div>
+                    <h3 class="bento-title">Experience</h3>
+                    <div class="timeline">
                         <div class="timeline-item">
                             <div class="tl-dot"><i class="fas fa-code"></i></div>
                             <div class="tl-content">
                                 <h4>Lead Developer</h4>
-                                <span class="tl-company">ArtXpert-Code</span>
+                                <span class="tl-company"><i class="fas fa-building"></i> ArtXpert-Code</span>
                                 <span class="tl-badge">2024 – Present</span>
                             </div>
                         </div>
@@ -172,199 +249,240 @@
                             <div class="tl-dot"><i class="fas fa-palette"></i></div>
                             <div class="tl-content">
                                 <h4>Graphic Designer</h4>
-                                <span class="tl-company">ArtXpert Design</span>
+                                <span class="tl-company"><i class="fas fa-building"></i> ArtXpert Design</span>
                                 <span class="tl-badge">2022 – Present</span>
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="tl-dot"><i class="fas fa-university"></i></div>
+                            <div class="tl-dot"><i class="fas fa-graduation-cap"></i></div>
                             <div class="tl-content">
-                                <h4>BSc IT Undergrad</h4>
-                                <span class="tl-company">Horizon Campus</span>
+                                <h4>BSc IT Undergraduate</h4>
+                                <span class="tl-company"><i class="fas fa-university"></i> Horizon Campus</span>
                                 <span class="tl-badge">Ongoing</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="tl-dot"><i class="fab fa-youtube"></i></div>
+                            <div class="tl-content">
+                                <h4>Gaming Content Creator</h4>
+                                <span class="tl-company"><i class="fas fa-gamepad"></i> XnoatSL</span>
+                                <span class="tl-badge">2021 – Present</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Skills (Wide) -->
+                <!-- Skills Bar Wide -->
                 <div class="bento-box bento-wide js-tilt reveal" data-delay="200">
                     <div class="bento-split">
-                        <div class="bento-skills">
-                            <h3 class="bento-title"><i class="fas fa-star text-gradient"></i> Proficiency</h3>
+                        <div class="bento-skill-col">
+                            <div class="bento-icon-badge"><i class="fas fa-star"></i></div>
+                            <h3 class="bento-title">Proficiency</h3>
                             <div class="skill-bars" id="skills-list"></div>
                         </div>
-                        <div class="bento-extra">
-                            <h3 class="bento-title"><i class="fas fa-gamepad text-gradient"></i> Extras</h3>
-                            <div class="info-row"><span class="info-label">Gaming Alias</span><span class="info-value text-highlight" id="about-alias"></span></div>
-                            <div class="info-row"><span class="info-label">Freelance</span><span class="info-value" id="about-freelance"></span></div>
+                        <div class="bento-extra-col">
+                            <div class="bento-icon-badge"><i class="fas fa-gamepad"></i></div>
+                            <h3 class="bento-title">Extras</h3>
+                            <div class="extra-cards">
+                                <div class="info-row">
+                                    <span class="info-label">Freelance Studio</span>
+                                    <span class="info-value" id="about-freelance"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Open Source</span>
+                                    <span class="info-value accent-text">17+ GitHub Repos</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Specialisation</span>
+                                    <span class="info-value">AI / ML Engineering</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
+            </div><!-- /bento-wrapper -->
         </div>
     </section>
 
-    <!-- ─── PROJECTS ──────────────────────────────────────────── -->
-    <section id="projects" class="projects">
+    <!-- ═══════════════════════════════════════════════════════
+         PROJECTS
+    ═══════════════════════════════════════════════════════ -->
+    <section id="projects" class="section projects-section">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">WHAT I BUILT</span>
-                <h2>My Projects</h2>
-                <p class="section-sub">From production AI systems to full-stack web apps</p>
+                <h2 class="section-title">My Projects</h2>
+                <p class="section-sub">From production AI systems to full-stack web applications</p>
             </div>
+
             <div class="project-filter reveal">
-                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn active" data-filter="all"><i class="fas fa-th"></i> All</button>
                 <button class="filter-btn" data-filter="ai-ml"><i class="fas fa-brain"></i> AI / ML</button>
                 <button class="filter-btn" data-filter="web"><i class="fas fa-globe"></i> Web Dev</button>
                 <button class="filter-btn" data-filter="app"><i class="fas fa-mobile-alt"></i> Apps</button>
                 <button class="filter-btn" data-filter="design"><i class="fas fa-palette"></i> Design</button>
                 <button class="filter-btn" data-filter="gaming"><i class="fas fa-gamepad"></i> Gaming</button>
             </div>
+
             <div class="project-grid" id="projects-grid"></div>
         </div>
     </section>
 
-    <!-- ─── GALLERY ───────────────────────────────────────────── -->
-    <section id="gallery" class="gallery">
+    <!-- ═══════════════════════════════════════════════════════
+         GALLERY
+    ═══════════════════════════════════════════════════════ -->
+    <section id="gallery" class="section gallery-section">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">ARTXPERT</span>
-                <h2>Design Gallery</h2>
-                <p class="section-sub">Brand identity, digital art, and poster design work</p>
+                <h2 class="section-title">Design Gallery</h2>
+                <p class="section-sub">Brand identity, digital art, and creative poster work</p>
             </div>
             <div class="gallery-grid" id="gallery-grid"></div>
         </div>
     </section>
 
-    <!-- ─── CONTACT ───────────────────────────────────────────── -->
-    <section id="contact" class="contact">
+    <!-- ═══════════════════════════════════════════════════════
+         CONTACT
+    ═══════════════════════════════════════════════════════ -->
+    <section id="contact" class="section contact-section">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">LET'S TALK</span>
-                <h2>Get in Touch</h2>
+                <h2 class="section-title">Get in Touch</h2>
                 <p class="section-sub">Open to internships, collaborations, and freelance projects</p>
             </div>
-            <div class="contact-content">
+
+            <div class="contact-layout">
+                <!-- Info Side -->
                 <div class="contact-info reveal">
-                    <div class="contact-card">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div class="contact-card-text">
-                            <h3>Email</h3>
+                    <div class="contact-card glass-card">
+                        <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
                             <p id="contact-email"></p>
                         </div>
                     </div>
-                    <div class="contact-card">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div class="contact-card-text">
-                            <h3>Phone</h3>
+                    <div class="contact-card glass-card">
+                        <div class="contact-card-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4>Phone</h4>
                             <p id="contact-phone"></p>
                         </div>
                     </div>
-                    <div class="contact-card">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="contact-card-text">
-                            <h3>Location</h3>
+                    <div class="contact-card glass-card">
+                        <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Location</h4>
                             <p id="contact-location"></p>
                         </div>
                     </div>
-                    <div class="contact-social">
-                        <h3>Connect With Me</h3>
+
+                    <div class="contact-socials">
+                        <h4>Follow Me</h4>
                         <div class="social-links">
-                            <a href="#" data-social="facebook" class="social-link" target="_blank"
-                                rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" data-social="youtube" class="social-link" target="_blank"
-                                rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-                            <a href="#" data-social="github" class="social-link" target="_blank"
-                                rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                            <a href="#" data-social="linkedin" class="social-link" target="_blank"
-                                rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" data-social="facebook" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" data-social="youtube"  class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                            <a href="#" data-social="github"   class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            <a href="#" data-social="linkedin" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form reveal">
-                    <h3>Send a Message</h3>
-                    <form id="contact-form" novalidate>
-                        <div class="form-row">
-                            <div class="form-group"><label for="msg-name">Name</label><input id="msg-name" type="text"
-                                    placeholder="Your Name" required></div>
-                            <div class="form-group"><label for="msg-email">Email</label><input id="msg-email"
-                                    type="email" placeholder="Your Email" required></div>
-                        </div>
-                        <div class="form-group"><label for="msg-subject">Subject</label><input id="msg-subject"
-                                type="text" placeholder="What's this about?"></div>
-                        <div class="form-group"><label for="msg-body">Message</label><textarea id="msg-body"
-                                placeholder="Tell me about your project or idea…" required rows="5"></textarea></div>
-                    <button type="submit" class="btn primary-btn submit-btn magnetic" id="contact-submit">
-                        Send Message <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
+
+                <!-- Form Side -->
+                <div class="contact-form-wrap reveal" data-delay="100">
+                    <div class="glass-card contact-form-card">
+                        <h3>Send a Message</h3>
+                        <p>Drop a message below and I'll get back to you within 24 hours.</p>
+                        <form id="contact-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="msg-name">Name</label>
+                                    <input id="msg-name" type="text" placeholder="Your full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="msg-email">Email</label>
+                                    <input id="msg-email" type="email" placeholder="your@email.com" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="msg-subject">Subject</label>
+                                <input id="msg-subject" type="text" placeholder="What's this about?">
+                            </div>
+                            <div class="form-group">
+                                <label for="msg-body">Message</label>
+                                <textarea id="msg-body" rows="5" placeholder="Tell me about your project or idea…" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary submit-btn magnetic" id="contact-submit">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ─── FOOTER ────────────────────────────────────────────── -->
-    <footer>
-        <div class="footer-glow"></div>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo"><span class="logo-accent">&lt;</span>CM<span
-                            class="logo-accent">/&gt;</span></div>
-                    <p id="footer-tagline">Building intelligent systems that solve real-world problems.</p>
-                    <div class="footer-socials">
-                        <a href="#" data-social="github" class="social-link fs" target="_blank"><i
-                                class="fab fa-github"></i></a>
-                        <a href="#" data-social="linkedin" class="social-link fs" target="_blank"><i
-                                class="fab fa-linkedin-in"></i></a>
-                        <a href="#" data-social="youtube" class="social-link fs" target="_blank"><i
-                                class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-nav">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-nav">
-                    <h4>Projects</h4>
-                    <ul>
-                        <li><a href="https://github.com/SLxnoat/Lanka-Microfinance-AI" target="_blank">Lanka
-                                Microfinance AI</a></li>
-                        <li><a href="https://github.com/SLxnoat/Project--ARIA" target="_blank">Project ARIA</a></li>
-                        <li><a href="https://github.com/SLxnoat/digit_identifier" target="_blank">Digit Identifier</a>
-                        </li>
-                        <li><a href="https://github.com/SLxnoat/Lanka-Auto-Advisor" target="_blank">Lanka Auto
-                                Advisor</a></li>
-                    </ul>
+    <!-- ═══════════════════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-aurora"></div>
+        <div class="container footer-layout">
+            <div class="footer-brand">
+                <div class="footer-logo"><span class="logo-bracket">&lt;</span>CM<span class="logo-bracket">/&gt;</span></div>
+                <p id="footer-tagline">Building intelligent systems that solve real-world problems.</p>
+                <div class="footer-socials">
+                    <a href="#" data-social="github"   class="social-link fs" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" data-social="linkedin" class="social-link fs" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" data-social="youtube"  class="social-link fs" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="footer-year"></span> Charuka Mayura Bandara — Designed &amp; Developed with <i
-                        class="fas fa-heart" style="color:#ef4444"></i> ArtXpert-Code </p>
-                <a href="../admin/login.html" class="footer-admin-btn" title="Admin Login" aria-label="Admin Login"><i class="fas fa-lock"></i></a>
+
+            <div class="footer-links-col">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4>Featured</h4>
+                <ul>
+                    <li><a href="https://github.com/SLxnoat/Lanka-Microfinance-AI" target="_blank">Lanka Microfinance AI</a></li>
+                    <li><a href="https://github.com/SLxnoat/Project--ARIA"          target="_blank">Project ARIA</a></li>
+                    <li><a href="https://github.com/SLxnoat/digit_identifier"       target="_blank">Digit Identifier</a></li>
+                    <li><a href="https://github.com/SLxnoat/Lanka-Auto-Advisor"     target="_blank">Lanka Auto Advisor</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; <span id="footer-year"></span> Charuka Mayura Bandara • Crafted with <i class="fas fa-heart" aria-hidden="true"></i> by ArtXpert-Code</p>
+                <a href="../admin/login.html" class="footer-admin-link" title="Admin Panel" aria-label="Admin Panel"><i class="fas fa-lock"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- ─── GALLERY LIGHTBOX ──────────────────────────────────── -->
-    <div id="gallery-modal" class="modal">
+    <!-- Gallery Lightbox Modal -->
+    <div id="gallery-modal" class="modal" role="dialog" aria-modal="true" aria-label="Gallery Lightbox">
         <div class="modal-overlay"></div>
         <div class="modal-box">
-            <button id="modal-close" class="modal-close"><i class="fas fa-times"></i></button>
-            <img id="modal-img" src="" alt="Gallery image">
+            <button id="modal-close" class="modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
+            <img id="modal-img" src="" alt="Gallery image enlarged">
             <div id="modal-caption"></div>
         </div>
     </div>
 
-    <!-- ─── TOAST ─────────────────────────────────────────────── -->
-    <div id="toast"></div>
+    <!-- Toast -->
+    <div id="toast" role="status" aria-live="polite"></div>
 
     <script type="module" src="controllers/AppController.js"></script>
 </body>
