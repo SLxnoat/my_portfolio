@@ -21,7 +21,9 @@ export class ContactController {
         if (raw) {
             const profile = Profile.fromPlainObject(raw);
             this.#view.renderContactInfo(profile);
-            this.#adminEmail = profile.notificationEmail || profile.email;
+            this.#adminEmail = profile.notificationEmail || profile.email || 'charuka03bc@gmail.com';
+        } else {
+            this.#adminEmail = 'charuka03bc@gmail.com';
         }
         this.#bindForm();
     }
