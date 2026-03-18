@@ -67,14 +67,19 @@ class AppController {
         const cvBtn = document.getElementById('download-cv');
         if (cvBtn) {
             cvBtn.addEventListener('click', () => {
-                const href = cvBtn.dataset.href;
-                if (!href || href === 'undefined') {
+                const profileObj = raw ? Profile.fromPlainObject(raw) : new Profile();
+                
+                // Prioritize uploaded CV File (Base64), fallback to external URL, then fallback to hardcoded href
+                const cvHref = profileObj.cvFile || profileObj.cvUrl || cvBtn.dataset.href;
+                
+                if (!cvHref || cvHref === 'undefined') {
                     this.#showToast('No CV file configured yet.', 'error');
                     return;
                 }
+                
                 const link = document.createElement('a');
-                link.href = href;
-                link.download = 'Charuka_Mayura_CV.pdf';
+                link.href = cvHref;
+                link.download = profileObj.cvFileName || 'Charuka_Mayura_CV.pdf';
                 link.click();
             });
         }

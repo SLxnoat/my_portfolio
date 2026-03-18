@@ -18,7 +18,8 @@ export class Profile {
      * @param {string} data.freelance
      * @param {string} data.gamingAlias
      * @param {Object} data.socials - { github, youtube, facebook, linkedin }
-     * @param {string} data.cvUrl
+     * @param {string} data.cvFile - Base64 encoded PDF string
+     * @param {string} data.cvFileName - Original filename of the uploaded CV
      * @param {string} data.tagline
      */
     constructor({
@@ -35,7 +36,8 @@ export class Profile {
         freelance = '',
         gamingAlias = '',
         socials = {},
-        cvUrl = '',
+        cvFile = '',
+        cvFileName = '',
         tagline = '',
     } = {}) {
         this.id = id;
@@ -56,7 +58,8 @@ export class Profile {
             facebook: socials.facebook || '',
             linkedin: socials.linkedin || '',
         };
-        this.cvUrl = cvUrl;
+        this.cvFile = cvFile;
+        this.cvFileName = cvFileName;
         this.tagline = tagline;
     }
 

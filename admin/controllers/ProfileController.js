@@ -49,6 +49,28 @@ export class ProfileController {
                 </div>
             </div>
 
+            <!-- ── CV Upload Card ── -->
+            <div class="avatar-crud-card" style="margin-top:20px;">
+                <div class="avatar-info">
+                    <h3>Resume / CV (PDF)</h3>
+                    <p>Upload your latest CV. This will be safely stored in the database and linked on your portfolio.</p>
+                    <div class="avatar-actions" style="margin-top: 10px;">
+                        <label class="btn primary-btn avatar-upload-btn" for="cv-upload">
+                            <i class="fas fa-file-pdf"></i> Upload PDF
+                        </label>
+                        <input type="file" id="cv-upload" accept="application/pdf" style="display:none">
+                        <button type="button" class="btn secondary-btn" id="cv-remove-btn" style="${p.cvFile ? '' : 'display:none'}">
+                            <i class="fas fa-trash"></i> Remove CV
+                        </button>
+                    </div>
+                    <div id="cv-filename-display" style="margin-top: 12px; font-size: 0.85rem; color: var(--primary-light); font-weight: 600;">
+                        ${p.cvFileName ? `<i class="fas fa-file-pdf"></i> ${p.cvFileName}` : 'No CV uploaded.'}
+                    </div>
+                    <input type="hidden" name="cvFile" id="cv-file-hidden" value="${p.cvFile}">
+                    <input type="hidden" name="cvFileName" id="cv-filename-hidden" value="${p.cvFileName}">
+                </div>
+            </div>
+
             <!-- ── Profile Fields ── -->
             <div class="form-grid">
                 <div class="form-group"><label>Full Name</label><input name="name" value="${p.name}"></div>
@@ -61,7 +83,7 @@ export class ProfileController {
                 <div class="form-group"><label>University</label><input name="university" value="${p.university}"></div>
                 <div class="form-group"><label>Freelance</label><input name="freelance" value="${p.freelance}"></div>
                 <div class="form-group"><label>Gaming Alias</label><input name="gamingAlias" value="${p.gamingAlias}"></div>
-                <div class="form-group"><label>CV / Resume URL</label><input name="cvUrl" value="${p.cvUrl}"></div>
+                <div class="form-group"><label>External CV Link (Optional fallback)</label><input name="cvUrl" value="${p.cvUrl}"></div>
                 <div class="form-group"><label>Tagline</label><input name="tagline" value="${p.tagline}"></div>
             </div>
 
@@ -80,6 +102,7 @@ export class ProfileController {
         </form>`;
 
         this.#bindAvatarHandlers(container);
+        this.#bindCvHandlers(container);
         this.#bindSubmit(container, p);
     }
 
@@ -129,6 +152,41 @@ export class ProfileController {
         }
     }
 
+    // ── CV handlers ──────────────────────────────────────────────────────────
+
+    #bindCvHandlers(container) {
+        container.querySelector('#cv-upload')?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.type !== 'application/pdf') {
+                alert('Please upload a valid PDF file.');
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                alert('CV file is too large. Please keep it under 5MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const base64Str = ev.target.result;
+                container.querySelector('#cv-file-hidden').value = base64Str;
+                container.querySelector('#cv-filename-hidden').value = file.name;
+                container.querySelector('#cv-filename-display').innerHTML = `<i class="fas fa-file-pdf"></i> ${file.name}`;
+                container.querySelector('#cv-remove-btn').style.display = '';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        container.querySelector('#cv-remove-btn')?.addEventListener('click', () => {
+            container.querySelector('#cv-file-hidden').value = '';
+            container.querySelector('#cv-filename-hidden').value = '';
+            container.querySelector('#cv-filename-display').textContent = 'No CV uploaded.';
+            container.querySelector('#cv-remove-btn').style.display = 'none';
+            container.querySelector('#cv-upload').value = ''; // reset file input
+        });
+    }
+
     // ── Form submit ──────────────────────────────────────────────────────────
 
     #bindSubmit(container, p) {
@@ -143,6 +201,8 @@ export class ProfileController {
                 degree: data.degree, university: data.university,
                 freelance: data.freelance, gamingAlias: data.gamingAlias,
                 cvUrl: data.cvUrl, tagline: data.tagline,
+                cvFile: data.cvFile || p.cvFile,
+                cvFileName: data.cvFileName || p.cvFileName,
                 avatarSrc: data.avatarSrc || p.avatarSrc,
                 socials: {
                     github:   data['socials.github'],

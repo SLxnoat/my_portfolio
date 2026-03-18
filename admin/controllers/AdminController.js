@@ -8,6 +8,7 @@ import { ProjectsAdminController } from './ProjectsAdminController.js';
 import { GalleryAdminController } from './GalleryAdminController.js';
 import { MessagesController } from './MessagesController.js';
 import { SkillsAdminController } from './SkillsAdminController.js';
+import { SettingsController } from './SettingsController.js';
 
 // ── Lightweight modal helper (shared across controllers) ──────────────────────
 class Modal {
@@ -98,6 +99,9 @@ class AdminController {
             case 'skills':
                 await this.#getCtrl('skills', () => new SkillsAdminController(this.#modal))
                     .render(document.getElementById('skills-list')); break;
+            case 'settings':
+                await this.#getCtrl('settings', () => new SettingsController())
+                    .render(document.getElementById('settings-form-wrap')); break;
         }
     }
 
