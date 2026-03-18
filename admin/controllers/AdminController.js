@@ -102,7 +102,8 @@ class AdminController {
     }
 
     #getCtrl(key, factory) {
-        if (!this.#controllers[key]) this.#controllers[key] = factory();
+        // Always create fresh controller on panel switch so data is never stale after CRUD ops
+        this.#controllers[key] = factory();
         return this.#controllers[key];
     }
 
