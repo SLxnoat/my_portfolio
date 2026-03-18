@@ -51,14 +51,10 @@ You don't need Node.js, npm, or a database server to run this project! It runs e
    ```
    *Or use the "Live Server" extension in VS Code.*
 
-3. **View the site:**
+4. **Access the Admin Dashboard:**
    - Client Portfolio: `http://localhost:3333/client/index.html`
    - Admin Dashboard: `http://localhost:3333/admin/login.html`
-
-4. **Login Credentials:**
-   The database automatically seeds itself on first load.
-   - **Username:** `admin`
-   - **Password:** `admin123`
+   *(The database automatically seeds itself on first load. Login credentials should be configured securely).*
 
 ## 📁 Project Structure
 
