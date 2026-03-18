@@ -257,11 +257,11 @@ class AppController {
         const count = window.innerWidth < 640 ? 25 : 50;
         for (let i = 0; i < count; i++) {
             const p    = document.createElement('span');
-            const size = Math.random() * 4 + 1.5;
+            p.classList.add('particle-bubble');
+            const size = Math.random() * 15 + 5; // Bubbles vary from 5px to 20px
             p.style.cssText = `
                 width:${size}px; height:${size}px;
                 left:${Math.random() * 100}%;
-                top:${Math.random() * 100 + 100}%;
                 opacity:${Math.random() * 0.4 + 0.05};
                 animation-duration:${Math.random() * 18 + 12}s;
                 animation-delay:${Math.random() * 8}s;
