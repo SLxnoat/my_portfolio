@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <span class="logo-accent">&lt;</span>CM<span class="logo-accent">/&gt;</span>
+        <span class="sidebar-title">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-panel="dashboard"><i class="fas fa-gauge-high"></i><span>Dashboard</span></a>
+        <a href="#" class="nav-item" data-panel="profile"><i class="fas fa-user-pen"></i><span>Profile</span></a>
+        <a href="#" class="nav-item" data-panel="projects"><i class="fas fa-folder-open"></i><span>Projects</span></a>
+        <a href="#" class="nav-item" data-panel="gallery"><i class="fas fa-images"></i><span>Gallery</span></a>
+        <a href="#" class="nav-item" data-panel="messages"><i class="fas fa-envelope"></i><span>Messages <span class="unread-badge" id="unread-badge" style="display:none"></span></span></a>
+        <a href="#" class="nav-item" data-panel="skills"><i class="fas fa-star"></i><span>Skills</span></a>
+    </nav>
+    <div class="sidebar-footer">
+        <a href="../client/index.html" class="nav-item"><i class="fas fa-eye"></i><span>View Site</span></a>
+        <button class="nav-item logout-btn" id="logout-btn"><i class="fas fa-right-from-bracket"></i><span>Logout</span></button>
+    </div>
+</aside>
+
+<!-- Top bar -->
+<div class="topbar">
+    <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-user">
+        <div class="avatar"><i class="fas fa-user-tie"></i></div>
+        <span>Admin</span>
+    </div>
+</div>
+
+<!-- Main content -->
+<main class="admin-main" id="admin-main">
+    <!-- ── Dashboard ── -->
+    <section class="panel active" id="panel-dashboard">
+        <div class="panel-header"><h2>Dashboard</h2><p>Overview of your portfolio</p></div>
+        <div class="stat-grid" id="stat-grid">
+            <div class="stat-card"><div class="stat-icon projects-icon"><i class="fas fa-folder-open"></i></div><div class="stat-info"><span class="stat-num" id="stat-projects">—</span><span class="stat-label">Projects</span></div></div>
+            <div class="stat-card"><div class="stat-icon gallery-icon"><i class="fas fa-images"></i></div><div class="stat-info"><span class="stat-num" id="stat-gallery">—</span><span class="stat-label">Gallery Items</span></div></div>
+            <div class="stat-card"><div class="stat-icon msg-icon"><i class="fas fa-envelope"></i></div><div class="stat-info"><span class="stat-num" id="stat-messages">—</span><span class="stat-label">Messages</span></div></div>
+            <div class="stat-card"><div class="stat-icon unread-icon"><i class="fas fa-bell"></i></div><div class="stat-info"><span class="stat-num" id="stat-unread">—</span><span class="stat-label">Unread</span></div></div>
+        </div>
+        <div class="quick-links">
+            <h3>Quick Actions</h3>
+            <div class="quick-grid">
+                <button class="quick-btn" data-panel="projects"><i class="fas fa-plus"></i> Add Project</button>
+                <button class="quick-btn" data-panel="gallery"><i class="fas fa-upload"></i> Add Gallery Item</button>
+                <button class="quick-btn" data-panel="messages"><i class="fas fa-envelope-open"></i> View Messages</button>
+                <button class="quick-btn" data-panel="profile"><i class="fas fa-user-pen"></i> Edit Profile</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Profile ── -->
+    <section class="panel" id="panel-profile">
+        <div class="panel-header"><h2>Edit Profile</h2><p>Update your personal and professional information</p></div>
+        <div id="profile-form-wrap"></div>
+    </section>
+
+    <!-- ── Projects ── -->
+    <section class="panel" id="panel-projects">
+        <div class="panel-header flex-row">
+            <div><h2>Projects</h2><p>Manage your portfolio projects</p></div>
+            <button class="btn primary-btn" id="add-project-btn"><i class="fas fa-plus"></i> Add Project</button>
+        </div>
+        <div id="projects-list"></div>
+    </section>
+
+    <!-- ── Gallery ── -->
+    <section class="panel" id="panel-gallery">
+        <div class="panel-header flex-row">
+            <div><h2>Gallery</h2><p>Manage your ArtXpert gallery</p></div>
+            <button class="btn primary-btn" id="add-gallery-btn"><i class="fas fa-plus"></i> Add Item</button>
+        </div>
+        <div id="gallery-list"></div>
+    </section>
+
+    <!-- ── Messages ── -->
+    <section class="panel" id="panel-messages">
+        <div class="panel-header"><h2>Messages</h2><p>Contact form submissions</p></div>
+        <div id="messages-list"></div>
+    </section>
+
+    <!-- ── Skills ── -->
+    <section class="panel" id="panel-skills">
+        <div class="panel-header flex-row">
+            <div><h2>Skills</h2><p>Manage skill bars</p></div>
+            <button class="btn primary-btn" id="add-skill-btn"><i class="fas fa-plus"></i> Add Skill</button>
+        </div>
+        <div id="skills-list"></div>
+    </section>
+</main>
+
+<!-- Universal Modal -->
+<div id="admin-modal" class="modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-box" id="modal-box">
+        <div class="modal-header">
+            <h3 id="modal-title">Modal</h3>
+            <button class="modal-close-btn" id="modal-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+    </div>
+</div>
+
+<script type="module" src="controllers/AdminController.js"></script>
+</body>
+</html>
