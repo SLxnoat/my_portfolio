@@ -11,43 +11,46 @@
 <body class="login-page">
 
 <div class="login-bg">
-    <div class="login-glow g1"></div>
-    <div class="login-glow g2"></div>
-</div>
-
-<div class="login-container">
     <div class="login-card">
+        <!-- Logo -->
         <div class="login-logo">
-            <span class="logo-accent">&lt;</span>CM<span class="logo-accent">/&gt;</span>
+            <div class="logo-mark">
+                <span class="logo-accent">&lt;</span>CM<span class="logo-accent">/&gt;</span>
+            </div>
+            <p>Administration Panel</p>
         </div>
-        <h1>Admin Panel</h1>
-        <p class="login-sub">Sign in to manage your portfolio</p>
 
-        <div id="login-error" class="error-msg" style="display:none">
+        <!-- Error -->
+        <div id="login-error" class="login-error" style="display:none">
             <i class="fas fa-exclamation-circle"></i>
             <span id="login-error-text">Invalid credentials</span>
         </div>
 
-        <form id="login-form" novalidate>
+        <!-- Form -->
+        <form id="login-form" class="login-form" novalidate>
             <div class="form-group">
                 <label for="login-user"><i class="fas fa-user"></i> Username</label>
-                <input id="login-user" type="text" placeholder="admin" autocomplete="username" required>
+                <input id="login-user" type="text" placeholder="Enter username" autocomplete="username" required>
             </div>
             <div class="form-group">
                 <label for="login-pass"><i class="fas fa-lock"></i> Password</label>
-                <div class="pass-wrap">
+                <div class="pw-wrap">
                     <input id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password" required>
-                    <button type="button" id="toggle-pass" tabindex="-1"><i class="fas fa-eye"></i></button>
+                    <button type="button" id="toggle-pass" class="pw-toggle" tabindex="-1">
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
             </div>
-            <button type="submit" class="btn login-btn" id="login-submit">
+            <button type="submit" class="btn primary-btn login-btn" id="login-submit">
                 <span>Sign In</span> <i class="fas fa-arrow-right"></i>
             </button>
         </form>
 
-        <a href="../client/index.html" class="back-link">
-            <i class="fas fa-arrow-left"></i> Back to Portfolio
-        </a>
+        <div class="login-footer">
+            <a href="../client/index.html">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
     </div>
 </div>
 
