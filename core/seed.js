@@ -9,7 +9,7 @@ import { GalleryItem } from './models/GalleryItem.js';
 import { Skill } from './models/Skill.js';
 
 export async function seedDatabase() {
-    const SEED_FLAG = 'portfolio_db_seeded_v2';
+    const SEED_FLAG = 'portfolio_db_seeded_v3';
     const db = Database.getInstance();
 
     // ── Auth is ALWAYS written (never skip) so login can never be broken ──
@@ -207,18 +207,18 @@ export async function seedDatabase() {
     // ─── Gallery ───────────────────────────────────────────────────────────
     await db.clear('gallery');
     const galleryItems = [
-        new GalleryItem({ title: 'Pizza Shop Branding',   description: 'Complete branding package including logo, menu design, and promotional materials.',      imageSrc: '../img/pizzashop.jpg',            category: 'branding' }),
-        new GalleryItem({ title: 'Anime Art Collection',  description: 'Anime-inspired digital artwork with vibrant colors for desktop wallpapers.',              imageSrc: '../img/animewallpaper.jpg',       category: 'digital-art' }),
-        new GalleryItem({ title: 'Poya Day Celebration',  description: 'Traditional Buddhist festival poster combining cultural elements and modern design.',      imageSrc: '../img/poyaflyer.jpg',            category: 'poster' }),
-        new GalleryItem({ title: 'Book Cover Series',     description: 'Collection of book cover designs showcasing typography and visual storytelling.',          imageSrc: '../img/bookcoverdesign.jpg',      category: 'design' }),
-        new GalleryItem({ title: 'Windows 11 Theme',      description: 'Custom Windows 11 desktop theme with minimalist, gaming-inspired elements.',              imageSrc: '../img/windows11wallpaper.jpg',   category: 'digital-art' }),
-        new GalleryItem({ title: 'Buddhist Art Series',   description: 'Symmetrical Buddhist art combining traditional motifs with digital techniques.',          imageSrc: '../img/symetricbuddhadesign.jpg', category: 'digital-art' }),
-        new GalleryItem({ title: 'T-Shirt Collection',    description: 'Custom t-shirt designs with unique artwork, typography, and cultural elements.',          imageSrc: '../img/customtshirtdesing.jpg',   category: 'design' }),
-        new GalleryItem({ title: 'Event Posters',         description: 'Dynamic poster designs with bold typography and eye-catching visuals.',                   imageSrc: '../img/posterdesign.jpg',         category: 'poster' }),
-        new GalleryItem({ title: 'PC Gaming Art',         description: 'High-resolution gaming wallpapers and custom digital illustrations for PC enthusiasts.',  imageSrc: '../img/pcwallpaper.jpg',          category: 'digital-art' }),
-        new GalleryItem({ title: 'Photo Frame Designs',   description: 'Custom photo frame designs combining digital art with traditional framing techniques.',   imageSrc: '../img/customframedphoto.jpg',    category: 'design' }),
-        new GalleryItem({ title: 'Digital Oil Paintings', description: 'Digital recreations of traditional oil paintings showcasing advanced digital painting.',  imageSrc: '../img/oilpainting.jpg',          category: 'digital-art' }),
-        new GalleryItem({ title: 'Textile Patterns',      description: 'Fabric pattern designs with geometric shapes and cultural motifs for textile use.',       imageSrc: '../img/fabricpattern.jpg',        category: 'design' }),
+        new GalleryItem({ title: 'Pizza Shop Branding',   description: 'Complete branding package including logo, menu design, and promotional materials.',      imageSrc: 'https://picsum.photos/seed/branding/800/600', category: 'branding' }),
+        new GalleryItem({ title: 'Anime Art Collection',  description: 'Anime-inspired digital artwork with vibrant colors for desktop wallpapers.',              imageSrc: 'https://picsum.photos/seed/anime/800/600', category: 'digital-art' }),
+        new GalleryItem({ title: 'Poya Day Celebration',  description: 'Traditional Buddhist festival poster combining cultural elements and modern design.',      imageSrc: 'https://picsum.photos/seed/festival/800/600', category: 'poster' }),
+        new GalleryItem({ title: 'Book Cover Series',     description: 'Collection of book cover designs showcasing typography and visual storytelling.',          imageSrc: 'https://picsum.photos/seed/books/800/600', category: 'design' }),
+        new GalleryItem({ title: 'Windows 11 Theme',      description: 'Custom Windows 11 desktop theme with minimalist, gaming-inspired elements.',              imageSrc: 'https://picsum.photos/seed/windows/800/600', category: 'digital-art' }),
+        new GalleryItem({ title: 'Buddhist Art Series',   description: 'Symmetrical Buddhist art combining traditional motifs with digital techniques.',          imageSrc: 'https://picsum.photos/seed/art/800/600', category: 'digital-art' }),
+        new GalleryItem({ title: 'T-Shirt Collection',    description: 'Custom t-shirt designs with unique artwork, typography, and cultural elements.',          imageSrc: 'https://picsum.photos/seed/tshirt/800/600', category: 'design' }),
+        new GalleryItem({ title: 'Event Posters',         description: 'Dynamic poster designs with bold typography and eye-catching visuals.',                   imageSrc: 'https://picsum.photos/seed/event/800/600', category: 'poster' }),
+        new GalleryItem({ title: 'PC Gaming Art',         description: 'High-resolution gaming wallpapers and custom digital illustrations for PC enthusiasts.',  imageSrc: 'https://picsum.photos/seed/pc/800/600', category: 'digital-art' }),
+        new GalleryItem({ title: 'Photo Frame Designs',   description: 'Custom photo frame designs combining digital art with traditional framing techniques.',   imageSrc: 'https://picsum.photos/seed/frame/800/600', category: 'design' }),
+        new GalleryItem({ title: 'Digital Oil Paintings', description: 'Digital recreations of traditional oil paintings showcasing advanced digital painting.',  imageSrc: 'https://picsum.photos/seed/paint/800/600', category: 'digital-art' }),
+        new GalleryItem({ title: 'Textile Patterns',      description: 'Fabric pattern designs with geometric shapes and cultural motifs for textile use.',       imageSrc: 'https://picsum.photos/seed/pattern/800/600', category: 'design' }),
     ];
     for (const item of galleryItems) await db.put('gallery', item.toPlainObject());
 
