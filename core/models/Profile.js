@@ -38,6 +38,7 @@ export class Profile {
         socials = {},
         cvFile = '',
         cvFileName = '',
+        availableForWork = true,
         tagline = '',
     } = {}) {
         this.id = id;
@@ -60,6 +61,7 @@ export class Profile {
         };
         this.cvFile = cvFile;
         this.cvFileName = cvFileName;
+        this.availableForWork = availableForWork;
         this.tagline = tagline;
     }
 

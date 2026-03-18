@@ -19,6 +19,12 @@ export class HeroView {
         if (avatarEl) avatarEl.src = profile.avatarSrc;
         if (cvBtn) cvBtn.dataset.href = profile.cvUrl;
 
+        // Available for work badge
+        const badgeEl = document.querySelector('.hero-badge');
+        if (badgeEl) {
+            badgeEl.style.display = profile.availableForWork ? 'inline-flex' : 'none';
+        }
+
         // Social icons
         const socials = [
             { key: 'github',   icon: 'fab fa-github',   id: 'social-github' },
