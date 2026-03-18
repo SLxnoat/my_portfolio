@@ -11,34 +11,47 @@ export default class ClientController {
     }
 
     init() {
+        // Force a fresh seed using Charuka's data
+        if (!localStorage.getItem('charuka_seeded_v1')) {
+            localStorage.clear();
+            localStorage.setItem('charuka_seeded_v1', 'true');
+        }
+        
         this.seedInitialDataIfEmpty();
         this.loadData();
     }
 
     seedInitialDataIfEmpty() {
-        // If DB is completely empty (first run), add some placeholder stuff so it doesn't look broken.
-        // E.g. The user's original HTML hardcoded values can be re-added here if needed.
         if (ProjectModel.getAll().length === 0) {
-            new ProjectModel('Quantum Neural Engine', 'Architected a distributed neural network framework reducing inference latency by 45%.', ['Python', 'TensorFlow', 'CUDA'], '45%', 'Latency Reduction').save();
-            new ProjectModel('Autonomous Trade Bot', 'Built an ML-driven high-frequency trading system leveraging sentiment analysis.', ['Node.js', 'PyTorch', 'Redis'], '$1.2M', 'Volume Managed').save();
+            new ProjectModel('Lanka Microfinance AI', 'Alternative credit scoring system for Sri Lankan micro-entrepreneurs using behavioral signals.', ['Python', 'XGBoost', 'Scikit-learn', 'Streamlit'], '96%', 'Accuracy').save();
+            new ProjectModel('Project ARIA', 'Adaptive Role Intelligence Assistant. A local LLM-powered AI assistant that generates personalised learning roadmaps.', ['Python', 'Ollama', 'LLaMA 3.2', 'Streamlit'], 'Local', 'LLM').save();
+            new ProjectModel('Digit Identifier', 'Interactive Handwritten Digit Classifier trained on MNIST with real-time prediction and confidence scores.', ['TensorFlow', 'Keras', 'CNN'], '95%', 'Test Accuracy').save();
+            new ProjectModel('Lanka Auto Advisor', 'AI Vehicle Price Prediction incorporating USD/LKR exchange rates and inflation data as economic context features.', ['Python', 'XGBoost', 'Scikit-learn'], '0.9422', 'R² Score').save();
+            new ProjectModel('WhaleLink', 'AI-powered marine monitoring dashboard predicting whale behaviour patterns.', ['React', 'Flask', 'REST API'], 'Active', 'Development').save();
         }
 
         if (ExperienceModel.getAll().length === 0) {
-            new ExperienceModel('Senior Machine Learning Engineer', 'TechCorp Innovations', '2023 - Present', 'Leading the AI research team focusing on generative models.', ['PyTorch', 'AWS', 'LLMs']).save();
-            new ExperienceModel('Data Scientist', 'Global Data Inc.', '2020 - 2023', 'Developed predictive models for customer churn resulting in 20% retention increase.', ['Python', 'SQL', 'Scikit-Learn']).save();
+            new ExperienceModel('Founder & Lead Developer', 'ArtXpert-Code', '2024 - Present', 'Maintaining public repositories spanning ML pipelines, NLP systems, LLM integrations, REST APIs, and full-stack web apps. Practising MLOps principles.', ['MLOps', 'Docker', 'CI/CD']).save();
+            new ExperienceModel('BSc (Hons) in Info Tech', 'Horizon Campus, Sri Lanka', '2023 - 2027', 'Focusing on Software Engineering, Web & Mobile Development, and AI Systems.', ['AI Systems', 'Software Engineering']).save();
+            new ExperienceModel('Founder & Graphic Designer', 'ArtXpert Design Brand', '2022 - Present', 'Client-facing design business delivering brand identity and digital illustration using Adobe Creative Suite.', ['Design', 'Adobe']).save();
+            new ExperienceModel('Diploma in ICT', 'IMBS Metro Campus', '2019 - 2020', 'Foundation in information and communication technology.', ['ICT']).save();
         }
 
         if (SkillModel.getAll().length === 0) {
             // Bars
-            new SkillModel('Python / C++', 95, false).save();
-            new SkillModel('Machine Learning / AI', 92, false).save();
-            new SkillModel('Data Engineering', 88, false).save();
+            new SkillModel('Python / ML', 95, false).save();
+            new SkillModel('Deep Learning (CNN/NLP)', 90, false).save();
+            new SkillModel('Data Science', 88, false).save();
+            new SkillModel('Generative AI (LLMs)', 85, false).save();
+            new SkillModel('Web Dev (React/Flask)', 82, false).save();
+            
             // Radar
-            new SkillModel('Deep Learning', 90, true).save();
-            new SkillModel('Cloud Architecture', 80, true).save();
-            new SkillModel('DevOps', 75, true).save();
-            new SkillModel('Algorithms', 95, true).save();
-            new SkillModel('System Design', 85, true).save();
+            new SkillModel('Machine Learning', 95, true).save();
+            new SkillModel('NLP & LLMs', 90, true).save();
+            new SkillModel('MLOps & Cloud', 82, true).save();
+            new SkillModel('Full-Stack', 85, true).save();
+            new SkillModel('Data Science', 88, true).save();
+            new SkillModel('Problem Solving', 92, true).save();
         }
     }
 
