@@ -240,11 +240,11 @@ section { padding: 110px 0; position: relative; }
 .nav-right { display: flex; align-items: center; gap: 14px; }
 .theme-switch { position: relative; }
 .toggle-label {
-    display: flex; align-items: center; gap: 6px;
+    display: flex; align-items: center; justify-content: space-between;
     width: 66px; height: 34px;
     background: var(--bg-3); border: 1px solid var(--border);
     border-radius: 99px; cursor: pointer; position: relative;
-    padding: 0 7px; transition: background var(--transition);
+    padding: 0 8px; transition: background var(--transition);
 }
 .toggle-label i { font-size: .75rem; z-index: 1; transition: opacity var(--transition); }
 .toggle-label .fa-moon { color: var(--primary-light); }
@@ -295,8 +295,7 @@ section { padding: 110px 0; position: relative; }
     min-height: calc(100vh - var(--nav-h));
 }
 .hero-badge {
-    position: absolute; top: clamp(20px, 4vw, 40px); left: clamp(20px, 4vw, 40px);
-    display: inline-flex; align-items: center; gap: 8px;
+    position: relative; display: inline-flex; align-items: center; gap: 8px;
     padding: 8px 16px; border-radius: 99px;
     background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2);
     color: #10B981; font-weight: 700; font-size: .8rem;
@@ -922,7 +921,7 @@ footer {
 /* ─── Responsive ──────────────────────────────────────────── */
 @media (max-width: 1100px) {
     .hero-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-    .hero-badge { position: relative; top: 0; left: 0; margin: 0 auto 20px auto; }
+    .hero-badge { margin: 0 auto 20px auto; }
     .hero-text h1 { font-size: clamp(2.2rem, 8vw, 3rem); letter-spacing: -1px; }
     .hero-text h2 { font-size: 1.1rem; }
     .cta-buttons { justify-content: center; }
