@@ -20,7 +20,13 @@ class AuthController {
         }
 
         await this.#db.open();
-        await seedDatabase();  // ensure DB is seeded even when accessing admin first
+        await seedDatabase();
+
+        // Safety net: always guarantee an auth record exists
+        const existing = await this.#db.get('auth', 'admin');
+        if (!existing) {
+            await this.#db.put('auth', { id: 'admin', username: 'admin', password: 'admin123' });
+        }
 
         this.#bindForm();
         this.#bindPasswordToggle();

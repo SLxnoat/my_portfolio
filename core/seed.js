@@ -10,12 +10,13 @@ import { Skill } from './models/Skill.js';
 
 export async function seedDatabase() {
     const SEED_FLAG = 'portfolio_db_seeded_v2';
-    if (localStorage.getItem(SEED_FLAG)) return;
-
     const db = Database.getInstance();
 
-    // ─── Auth ──────────────────────────────────────────────────────────────
+    // ── Auth is ALWAYS written (never skip) so login can never be broken ──
     await db.put('auth', { id: 'admin', username: 'admin', password: 'admin123' });
+
+    // ── Everything else only seeds once ───────────────────────────────────
+    if (localStorage.getItem(SEED_FLAG)) return;
 
     // ─── Profile ───────────────────────────────────────────────────────────
     await db.put('profile', new Profile({

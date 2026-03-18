@@ -413,6 +413,7 @@ ul { list-style:none; }
     .admin-main { margin-left: 0; }
     .sidebar-toggle { display: flex; }
     .admin-form .form-grid { grid-template-columns: 1fr; }
+    .avatar-preview-wrap { flex-direction: column; }
 }
 @media (max-width: 600px) {
     .admin-main { padding: 20px 16px; }
@@ -420,3 +421,41 @@ ul { list-style:none; }
     .data-grid { grid-template-columns: 1fr; }
     .login-card { padding: 32px 24px; }
 }
+
+/* ─── Avatar CRUD Card ─────────────────────────────────────── */
+.avatar-crud-card {
+    background: var(--bg-2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px;
+    margin-bottom: 28px;
+}
+.avatar-preview-wrap {
+    display: flex; align-items: flex-start; gap: 32px;
+}
+.avatar-preview {
+    width: 120px; height: 120px; flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary)) center/cover no-repeat;
+    border: 3px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: rgba(255,255,255,0.3);
+    box-shadow: 0 0 0 4px rgba(124,58,237,0.2);
+    transition: border-color var(--transition), box-shadow var(--transition);
+    overflow: hidden;
+}
+.avatar-preview:has(> i) { background-image: none !important; }
+.avatar-info { flex: 1; min-width: 0; }
+.avatar-info h3 { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.avatar-info > p { font-size: .85rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5; }
+.avatar-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 4px; }
+.avatar-upload-btn { cursor: pointer; }
+
+/* ─── Section Divider ─────────────────────────────────────── */
+.section-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 28px 0 20px; color: var(--text-dim); font-size: .78rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
+}
+.section-divider::before, .section-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
