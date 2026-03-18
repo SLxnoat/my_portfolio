@@ -10,7 +10,7 @@ export class GalleryView {
         if (!grid) return;
 
         grid.innerHTML = items.map(item => `
-            <div class="gallery-item reveal" data-id="${item.id}" data-src="${item.imageSrc}" data-title="${item.title}" data-desc="${item.description}">
+            <div class="gallery-item reveal js-tilt" data-id="${item.id}" data-src="${item.imageSrc}" data-title="${item.title}" data-desc="${item.description}">
                 <div class="gallery-card" style="background-image:url('${item.imageSrc}');">
                     <div class="gallery-overlay">
                         <i class="fas fa-expand"></i>
