@@ -30,7 +30,6 @@ class AppController {
     #db;
     #heroView;
     #aboutView;
-    #skillsBarsAnimated = false;
 
     constructor() {
         this.#db        = Database.getInstance();
@@ -54,7 +53,6 @@ class AppController {
         this.#initScrollReveal();
         this.#initFooter();
         this.#initCursorGlow();
-        this.#initTabs();
         this.#initStatCounters();
     }
 
@@ -122,51 +120,6 @@ class AppController {
         if (profile) this.#aboutView.render(profile, skills);
     }
 
-    // ── Tabs (About / Experience / Skills) ────────────────────────────────────
-
-    #initTabs() {
-        const btns   = document.querySelectorAll('.tab-btn');
-        const panels = document.querySelectorAll('.tab-panel');
-
-        btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.dataset.tab;
-
-                btns.forEach(b => b.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
-
-                btn.classList.add('active');
-                const panel = document.getElementById(`tab-${target}`);
-                if (panel) panel.classList.add('active');
-
-                // Animate skill bars when Skills tab is opened
-                if (target === 'skills' && !this.#skillsBarsAnimated) {
-                    setTimeout(() => this.#aboutView.animateSkillBars(), 80);
-                    this.#skillsBarsAnimated = true;
-                }
-
-                // Re-run reveal on newly visible elements
-                setTimeout(() => this.#reObserveReveals(), 50);
-            });
-        });
-
-        // Also trigger bar animation if About section enters viewport while skills tab is already active
-        const aboutSection = document.getElementById('about');
-        if (aboutSection) {
-            new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const activeTab = document.querySelector('.tab-btn.active');
-                        if (activeTab?.dataset?.tab === 'skills' && !this.#skillsBarsAnimated) {
-                            this.#aboutView.animateSkillBars();
-                            this.#skillsBarsAnimated = true;
-                        }
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 }).observe(aboutSection);
-        }
-    }
 
     // ── Animated stat counters ────────────────────────────────────────────────
 

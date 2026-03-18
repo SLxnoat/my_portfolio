@@ -30,46 +30,29 @@ export class AboutView {
         if (phoneEl) phoneEl.textContent = profile.phone;
 
         // Skills
-        const skillsContainer = document.getElementById('skills-list');
+        const skillsContainer = document.getElementById('bento-skills');
         if (skillsContainer && skills && skills.length) {
             skillsContainer.innerHTML = skills.map(skill => `
-                <div class="skill">
-                    <div class="skill-header">
-                        <span class="skill-name"><i class="${escapeHTML(skill.icon || 'fas fa-star')}"></i> ${escapeHTML(skill.name)}</span>
-                        <span class="skill-pct">${escapeHTML(skill.percentage)}%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" data-pct="${escapeHTML(skill.percentage)}" style="width:0%"></div>
-                    </div>
+                <div class="bento-skill-pill reveal">
+                    <i class="${escapeHTML(skill.icon || 'fas fa-star')}"></i>
+                    <span>${escapeHTML(skill.name)}</span>
                 </div>
             `).join('');
         }
 
         // Experience Timeline
-        const timelineContainer = document.querySelector('.timeline');
+        const timelineContainer = document.getElementById('bento-timeline');
         if (timelineContainer && profile.experience && profile.experience.length) {
             timelineContainer.innerHTML = profile.experience.map(exp => `
-                <div class="timeline-item reveal">
-                    <div class="tl-dot"><i class="${escapeHTML(exp.icon || 'fas fa-briefcase')}"></i></div>
-                    <div class="tl-card">
-                        <div class="tl-header">
-                            <h4>${escapeHTML(exp.role)}</h4>
-                            <span class="tl-badge">${escapeHTML(exp.period)}</span>
-                        </div>
-                        <div class="tl-company"><i class="fas fa-building"></i> ${escapeHTML(exp.company)}</div>
-                        <p>${escapeHTML(exp.desc)}</p>
-                        <div class="tl-tags">
-                            ${(exp.tags || []).map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}
-                        </div>
+                <div class="bento-tl-node reveal">
+                    <div class="bento-tl-icon"><i class="${escapeHTML(exp.icon || 'fas fa-briefcase')}"></i></div>
+                    <div class="bento-tl-content">
+                        <h5>${escapeHTML(exp.role)}</h5>
+                        <span class="sub">${escapeHTML(exp.period)}</span>
+                        <p>${escapeHTML(exp.company)} — ${escapeHTML(exp.desc)}</p>
                     </div>
                 </div>
             `).join('');
         }
-    }
-
-    animateSkillBars() {
-        document.querySelectorAll('.skill-fill').forEach(bar => {
-            bar.style.width = `${bar.dataset.pct}%`;
-        });
     }
 }
