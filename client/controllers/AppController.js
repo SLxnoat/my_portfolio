@@ -55,8 +55,6 @@ class AppController {
         this.#initCursorGlow();
         this.#initTabs();
         this.#initStatCounters();
-        this.#init3DTilt();
-        this.#initMagneticButtons();
     }
 
     // ── Hero ──────────────────────────────────────────────────────────────────
@@ -198,7 +196,7 @@ class AppController {
             });
         }, { threshold: 0.5 });
 
-        const statsEl = document.querySelector('.stats-inner, .hero-stats');
+        const statsEl = document.querySelector('.hero-stats');
         if (statsEl) obs.observe(statsEl);
     }
 
@@ -211,98 +209,10 @@ class AppController {
             glow.style.display = 'none';
             return;
         }
-        
-        // Use requestAnimationFrame for buttery smooth cursor tracking
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let currentX = mouseX;
-        let currentY = mouseY;
-        
         document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            glow.style.left = `${e.clientX}px`;
+            glow.style.top  = `${e.clientY}px`;
         });
-
-        const updateCursor = () => {
-            // Spring physics interpolation
-            currentX += (mouseX - currentX) * 0.15;
-            currentY += (mouseY - currentY) * 0.15;
-            glow.style.transform = `translate(${currentX}px, ${currentY}px)`;
-            requestAnimationFrame(updateCursor);
-        };
-        updateCursor();
-    }
-
-    // ── 3D Tilt Effect ────────────────────────────────────────────────────────
-    
-    #init3DTilt() {
-        const attachTilt = () => {
-            const cards = document.querySelectorAll('.js-tilt');
-            // Check for coarse pointer (mobile) so we don't bind heavy tilt on touch
-            if (window.matchMedia('(pointer: coarse)').matches) return;
-
-            cards.forEach(card => {
-                // Prevent duplicate binding
-                if (card.dataset.tiltBound) return;
-                card.dataset.tiltBound = 'true';
-
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; // x position within the element
-                    const y = e.clientY - rect.top;  // y position within the element
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    // Constrain rotation to max 10 degrees
-                    const rotateX = ((y - centerY) / centerY) * -8;
-                    const rotateY = ((x - centerX) / centerX) * 8;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    // Reset with a smooth transition
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                });
-            });
-        };
-
-        attachTilt();
-        // Re-attach if DOM changes (like Projects loaded dynamically)
-        const observer = new MutationObserver(attachTilt);
-        observer.observe(document.body, { childList: true, subtree: true });
-    }
-
-    // ── Magnetic Buttons ──────────────────────────────────────────────────────
-
-    #initMagneticButtons() {
-        const attachMagnetic = () => {
-            const btns = document.querySelectorAll('.magnetic, .social-link');
-            if (window.matchMedia('(pointer: coarse)').matches) return;
-
-            btns.forEach(btn => {
-                if (btn.dataset.magneticBound) return;
-                btn.dataset.magneticBound = 'true';
-
-                btn.addEventListener('mousemove', (e) => {
-                    const rect = btn.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    
-                    // Pull button slightly towards cursor (strength factor 0.3)
-                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-                });
-                
-                btn.addEventListener('mouseleave', () => {
-                    btn.style.transform = `translate(0px, 0px)`;
-                });
-            });
-        };
-
-        attachMagnetic();
-        const observer = new MutationObserver(attachMagnetic);
-        observer.observe(document.body, { childList: true, subtree: true });
     }
 
     // ── Navbar ────────────────────────────────────────────────────────────────
@@ -314,19 +224,16 @@ class AppController {
 
         // Mobile menu toggle
         menuBtn?.addEventListener('click', () => {
-            const isOpen = navLinks.classList.contains('open');
             menuBtn.classList.toggle('active');
-            navLinks.classList.toggle('open');
-            menuBtn.setAttribute('aria-expanded', String(!isOpen));
-            document.body.style.overflow = !isOpen ? 'hidden' : '';
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
         });
 
         // Close mobile menu on nav-link click
         navLinks?.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 menuBtn?.classList.remove('active');
-                navLinks.classList.remove('open');
-                menuBtn?.setAttribute('aria-expanded', 'false');
+                navLinks.classList.remove('active');
                 document.body.style.overflow = '';
             });
         });
@@ -335,8 +242,7 @@ class AppController {
         document.addEventListener('click', (e) => {
             if (!menuBtn?.contains(e.target) && !navLinks?.contains(e.target)) {
                 menuBtn?.classList.remove('active');
-                navLinks?.classList.remove('open');
-                menuBtn?.setAttribute('aria-expanded', 'false');
+                navLinks?.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
@@ -351,7 +257,7 @@ class AppController {
                 lastScroll = 0;
                 return;
             }
-            if (navLinks?.classList.contains('open')) return;
+            if (navLinks?.classList.contains('active')) return;
             if (Math.abs(cur - lastScroll) < 40) return;
             navbar?.classList.toggle('scroll-down', cur > lastScroll);
             navbar?.classList.toggle('scroll-up',   cur < lastScroll);

@@ -39,12 +39,6 @@ export class ProfileController {
                             <button type="button" class="btn secondary-btn" id="avatar-remove-btn">
                                 <i class="fas fa-trash"></i> Remove
                             </button>
-                            <div class="form-group" style="grid-column: 1 / -1;">
-                                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-                                    <input type="checkbox" name="availableForWork" ${p.availableForWork ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: var(--primary);">
-                                    <span style="font-weight: 600;">Currently Available for Work</span>
-                                </label>
-                            </div>
                         </div>
                         <div class="form-group" style="margin-top:14px">
                             <label>— OR — Image URL</label>
@@ -210,7 +204,6 @@ export class ProfileController {
                 cvFile: data.cvFile || p.cvFile,
                 cvFileName: data.cvFileName || p.cvFileName,
                 avatarSrc: data.avatarSrc || p.avatarSrc,
-                availableForWork: fd.get('availableForWork') === 'on',
                 socials: {
                     github:   data['socials.github'],
                     youtube:  data['socials.youtube'],

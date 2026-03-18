@@ -26,7 +26,7 @@ export class ProjectsView {
                 : '';
 
             return `
-            <div class="project-card reveal js-tilt" data-category="${p.category}" data-id="${p.id}">
+            <div class="project-card reveal" data-category="${p.category}" data-id="${p.id}">
                 ${imageBanner}
                 <div class="project-info">
                     <h3>${p.title}</h3>
